@@ -6,9 +6,9 @@
   <target name="clean">
     <delete failonerror="false">
       <fileset dir="bin/" includes="**/*.class" />
-    </delete>
-    <delete failonerror="false">
       <fileset dir="output/" includes="**/*.jar" />
+      <fileset dir="output/" includes="**/*.bat" />
+      <fileset dir="output/" includes="**/*.sh" />
     </delete>
   </target>  
   
