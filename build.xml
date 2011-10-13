@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project name="osll" default="dist" basedir="." >
+
+  <property file="build.properties" />
+  
+  <target name="clean">
+    <delete failonerror="false">
+      <fileset dir="bin/" includes="**/*.class" />
+    </delete>
+    <delete failonerror="false">
+      <fileset dir="output/" includes="**/*.jar" />
+    </delete>
+  </target>  
+  
+  <target name="build">
+    <mkdir dir="bin/" />
+    <mkdir dir="output" />
+    <javac srcdir="src/" destdir="bin/"/>
+  </target>
+  
+  <target name="dist" depends="build"
+        description="generate the distribution" >
+    <jar jarfile="output/osll.jar" basedir="bin/">
+        <manifest>
+            <attribute name="Main-Class" value="lobstre.osll.Osll"/>
+        </manifest>
+   </jar>
+   <copy file="osll.sh" todir="output/"/>
+   <copy file="osll.bat" todir="output/"/>
+  </target>
+</project>

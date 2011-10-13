@@ -1,0 +1,69 @@
+* create
+** osll 2010-08.txt create 177
+** osll 2010-08.txt c 177
+* set-initial
+** osll 2010-08.txt set-initial 230
+** osll 2010-08.txt si 230
+* set-budget
+** osll 2010-08.txt set-budget car 150
+** osll 2010-08.txt set-budget car
+** osll 2010-08.txt sb car 150
+** osll 2010-08.txt sb car
+* list
+** osll 2010-08.txt list 
+** osll 2010-08.txt l 
+* list-budget
+** osll 2010-08.txt list-budget 
+** osll 2010-08.txt lb 2010-08
+* list-damocles
+** osll 2010-08.txt list-damocles 2010-08
+** osll 2010-08.txt ld 2010-08
+* list-operation
+** osll 2010-08.txt list-operation 2010-08
+** osll 2010-08.txt lo 2010-08
+* add-damocles
+** osll 2010-08.txt add-damocles car plein-essence 45.75
+** osll 2010-08.txt ad car plein-essence 45.75
+* remove-damocles
+** osll 2010-08.txt remove-damocles 2
+** osll 2010-08.txt rd 2
+* convert-damocles
+** osll 2010-08.txt convert-damocles 2 2010-08-12
+** osll 2010-08.txt convert-damocles 2 2010-08-12 46.78
+** osll 2010-08.txt cd 2 2010-08-12
+** osll 2010-08.txt cd 2 2010-08-12 46.78
+* add-operation
+** osll 2010-08.txt add-operation car plein-essence 45.75 2010-08-12
+** osll 2010-08.txt ao car plein-essence 45.75 2010-08-12
+* remove-operation
+** osll 2010-08.txt remove-operation 3
+** osll 2010-08.txt ro 3
+* status
+** osll 2010-08.txt status 
+** osll 2010-08.txt s 
+* add-prevision
+** osll 2010-08.txt add-prevision car plein-essence 50
+** osll 2010-08.txt ap car plein-essence 50
+* convert-prevision
+** osll 2010-08.txt convert-prevision 1
+** osll 2010-08.txt convert-prevision 1 45.75 
+** osll 2010-08.txt cp 1
+** osll 2010-08.txt cp 1 45.75
+* next-commit
+** osll 2010-09.txt next-commit 2009-08.txt 2010-08.txt template.txt
+** osll 2010-09.txt next-commit 2009-08.txt 2010-08.txt
+** osll 2010-09.txt nc 2009-08.txt 2010-08.txt template.txt
+** osll 2010-09.txt nc 2009-08.txt 2010-08.txt 
+* next-simulate
+** osll 2010-09.txt next-simulate 2009-08.txt 2010-08.txt template.txt
+** osll 2010-09.txt next-simulate 2009-08.txt 2010-08.txt
+** osll 2010-09.txt ns 2009-08.txt 2010-08.txt template.txt
+** osll 2010-09.txt ns 2009-08.txt 2010-08.txt
+* monte-carlo
+** osll 2010-08.txt monte-carlo 2010-08-15
+** osll 2010-08.txt mc 2010-08-15
+** osll 2010-08.txt monte-carlo
+** osll 2010-08.txt mc
+* average
+** osll 2010-08.txt average 2009-08.txt
+** osll 2010-08.txt av 2009-08.txt

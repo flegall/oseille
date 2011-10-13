@@ -1,0 +1,4 @@
+init:300.0
+budget:car:100
+damocles:car:plein-essence:45.75
+operation:car:plein-essence:45.75:10-08-2010
