@@ -6,9 +6,9 @@
   <target name="clean">
     <delete failonerror="false">
       <fileset dir="bin/" includes="**/*.class" />
-      <fileset dir="output/" includes="**/*.jar" />
-      <fileset dir="output/" includes="**/*.bat" />
-      <fileset dir="output/" includes="**/*.sh" />
+      <fileset dir="output/" includes="**/osll.jar" />
+      <fileset dir="output/" includes="**/osll.bat" />
+      <fileset dir="output/" includes="**/osll" />
     </delete>
   </target>  
   
@@ -25,7 +25,7 @@
             <attribute name="Main-Class" value="lobstre.osll.Osll"/>
         </manifest>
    </jar>
-   <copy file="osll.sh" todir="output/"/>
+   <copy file="osll" todir="output/"/>
    <copy file="osll.bat" todir="output/"/>
   </target>
 </project>
