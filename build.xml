@@ -4,6 +4,7 @@
   <target name="clean">
     <delete failonerror="false">
       <fileset dir="bin/" includes="**/*.class" />
+      <fileset dir="bin/" includes="**/*.txt" />
       <fileset dir="output/" includes="**/osll.jar" />
       <fileset dir="output/" includes="**/osll.bat" />
       <fileset dir="output/" includes="**/osll" />
@@ -16,7 +17,7 @@
     <javac srcdir="src/" destdir="bin/"/>
   </target>
   
-  <target name="dist" depends="build"
+  <target name="dist" depends="clean,build"
         description="generate the distribution" >
     <jar jarfile="output/osll.jar" basedir="bin/">
         <manifest>
