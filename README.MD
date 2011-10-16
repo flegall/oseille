@@ -1,2 +1,2 @@
-Oseille : My own personal accounting software.
+# Oseille : My own personal accounting software.
 A basic accounting software that fits my budget planning needs.
