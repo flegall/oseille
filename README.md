@@ -30,6 +30,7 @@ See syntax.txt to understand the syntax of the command line.
 # Data model
 Oseille's model works on account files.
 Each file contains :
+
   - An initial amount balance.
   - A sequence of budget items defined by a category name, containing an amount.
   - A sequence of operations : each operation is a transaction which contains :
