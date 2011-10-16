@@ -5,14 +5,15 @@ My own personal accounting software.
 A basic accounting software tool that fits my budget planning needs.
 I wrote this originally because I was doing very repetitive operations on spreadsheets for my personal accounting needs.
 The way I was keeping track of my expenses seemed ok for but needed some automation.
-I was told by [uucidl](https://github.com/uucidl) about [ledger](http://joyful.com/darcsden/simon/ledger/doc/ledger.html)
+
+I was told by [uucidl](https://github.com/uucidl) about [ledger](http://joyful.com/darcsden/simon/ledger/doc/ledger.html).
 I was too lazy to learn the double-entry book-keeping system and thought I could write something based on text files that could automate my way of doing it.
 Here is the result :)
 
 Basically, my two main concerns are to know how much I can save/spend each month.
 For this I need two things : 
-* Planning budgets
-* Keeping track on all expenses/incomes, especially the ones that don't appear immediately on my bank account web-site : french checks, late card payments...
+  - Planning budgets
+  - Keeping track on all expenses/incomes, especially the ones that don't appear immediately on my bank account web-site : french checks, late card payments...
 
 Technically : It works fully in command line, storage/persistence is based on human readable text files. It provides a single "osll" command to operate.
 
@@ -28,18 +29,18 @@ See syntax.txt to understand the syntax of the command line.
 # Data model
 Oseille's model works on account files.
 Each file contains :
-* An initial amount balance.
-* A sequence of budget items defined by a category name, containing an amount.
-* A sequence of operations : each operation is a transaction which contains :
-** A category name.
-** An amount.
-** An operation date.
-* A sequence of "Damocles" : a transaction that's been done but is not paid yet, it contains
-** A category name.
-** An amount.
-* A sequence of previsions : a transaction that I plan to make (or should be automatically made at some time), it contains
-** A category name.
-** An amount.
+  - An initial amount balance.
+  - A sequence of budget items defined by a category name, containing an amount.
+  - A sequence of operations : each operation is a transaction which contains :
+   - A category name.
+   - An amount.
+   - An operation date.
+  - A sequence of "Damocles" : a transaction that's been done but is not paid yet, it contains
+   - A category name.
+   - An amount.
+  - A sequence of previsions : a transaction that I plan to make (or should be automatically made at some time), it contains
+   - A category name.
+   - An amount.
 
 The dates require to be lexicographically comparable. 
 Only the MonteCarlo & Average commands require to have them written as yy-mm-dd.
