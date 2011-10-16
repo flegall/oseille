@@ -12,6 +12,7 @@ Here is the result :)
 
 Basically, my two main concerns are to know how much I can save/spend each month.
 For this I need two things : 
+
   - Planning budgets
   - Keeping track on all expenses/incomes, especially the ones that don't appear immediately on my bank account web-site : french checks, late card payments...
 
