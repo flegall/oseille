@@ -31,19 +31,19 @@ See syntax.txt to understand the syntax of the command line.
 Oseille's model works on account files.
 Each file contains :
 
-  - An initial amount balance.
-  - A sequence of budget items defined by a category name, containing an amount.
-  - A sequence of operations : each operation is a transaction which contains :
-   - A category name.
-   - An amount.
-   - An operation date.
-  - A sequence of "Damocles" : a transaction that's been done but is not paid yet, it contains
-   - A category name.
-   - An amount.
-  - A sequence of previsions : a transaction that I plan to make (or should be automatically made at some time), it contains
-   - A category name.
-   - An amount.
-   
+- An initial amount balance.
+- A sequence of budget items defined by a category name, containing an amount.
+- A sequence of operations : each operation is a transaction which contains:
+ - A category name.
+ - An amount.
+ - An operation date.
+- A sequence of "Damocles" : a transaction that's been done but is not paid yet, it contains:
+ - A category name.
+ - An amount.
+- A sequence of previsions : a transaction that I plan to make (or should be automatically made at some time), it contains:
+ - A category name.
+ - An amount.
+  
 # Life-cycle
 - Initialize a file with an initial amount. (commands: create set-initial)
 - Set budgets for all categories. (commands: create set-budget, adjust-budget, list-budget, list)
