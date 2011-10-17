@@ -43,6 +43,16 @@ Each file contains :
   - A sequence of previsions : a transaction that I plan to make (or should be automatically made at some time), it contains
    - A category name.
    - An amount.
+   
+# Life-cycle
+- Initialize a file with an initial amount. (commands: create set-initial)
+- Set budgets for all categories. (commands: create set-budget, adjust-budget, list-budget, list)
+- Add previsions for future planned payments (commands: add-prevision) 
+- For each expense/income that's been done but it not recorded yet: add a damocles or convert a prevision to a damocles. (commands: convert-prevision, add-damocles) 
+- When it's finally recorded on your bank account, convert it to an operation. (commands: convert-damocles, add-operation)
+- Clean up unwanted items. (commands remove-operation, remove-damocles, remove-prevision)
+- Print reports. (commands: list, list-budget, list-damocles, list-prevision, list-operation, status, monte-carlo, average) 
+- At the end of the period, end the current file and move the pending damocles & operations to the next file (commands: next-simulate, next-commit)
 
 The dates require to be lexicographically comparable. 
 Only the MonteCarlo & Average commands require to have them written as yy-mm-dd.
