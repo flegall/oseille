@@ -36,16 +36,16 @@ public class Average implements Command {
     @Override
     public void execute (final String fileName, final List<String> arguments) throws IOException, ParseException {
         // List all history files
-        final List<File> files = Arrays.asList (new File (".").listFiles ());
-        final NavigableSet<String> fileNames = new TreeSet<String> ();
-        for (final File file : files) {
-            fileNames.add (file.getName ());
+        final List<File> allFiles = Arrays.asList (new File (".").listFiles ());
+        final NavigableSet<String> allFileNames = new TreeSet<String> ();
+        for (final File file : allFiles) {
+            allFileNames.add (file.getName ());
         }
-        final NavigableSet<String> subSet = fileNames.subSet (arguments.get (0), true, fileName, false);
+        final NavigableSet<String> historyFileNames = allFileNames.subSet (arguments.get (0), true, fileName, false);
 
         // Parse all history accounts
-        final List<Account> historyAccounts = new ArrayList<Account> (subSet.size ());
-        for (final String hFileName : subSet) {
+        final List<Account> historyAccounts = new ArrayList<Account> (historyFileNames.size ());
+        for (final String hFileName : historyFileNames) {
             final File hFile = new File (hFileName);
             historyAccounts.add (Parser.read (hFile));
         }
