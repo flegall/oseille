@@ -108,7 +108,7 @@ public class Average implements Command {
         final Operation firstOperation = account.getOperations ().get (0);
         final Date firstDate = MonteCarlo.DATE_FORMAT.parse (firstOperation.getDate ());
         final Operation lastOperation = account.getOperations ().get (account.getOperations ().size () - 1);
-        Date targetDate = MonteCarlo.DATE_FORMAT.parse (lastOperation.getDate ());
+        final Date targetDate = MonteCarlo.DATE_FORMAT.parse (lastOperation.getDate ());
         final int currentDate = MonteCarlo.delta (firstDate, targetDate);
         
         BigDecimal currentValue = account.getInitialAmount ();
@@ -150,7 +150,7 @@ public class Average implements Command {
         System.out.println (tr.toString ());
 
         {
-            TableRenderer trs = new TableRenderer ();
+            final TableRenderer trs = new TableRenderer ();
             trs.left ("Current date");
             trs.left (Integer.valueOf (currentDate).toString ());
             trs.newLine ();
