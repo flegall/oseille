@@ -4,3 +4,6 @@
 *.jar
 oseille/output/*
 oseille/bin/*
+
+# Mac stuff
+.DS_Store
