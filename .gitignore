@@ -2,5 +2,5 @@
 ###################
 *.class
 *.jar
-output/*
-bin/*
+oseille/output/*
+oseille/bin/*
