@@ -40,7 +40,7 @@ public class LongPeriodSummary implements Command {
 			fileNames.add(file.getName());
 		}
 		final NavigableSet<String> subSet = fileNames.subSet(arguments.get(0),
-				true, fileName, false);
+				true, fileName, true);
 
 		// Parse all history accounts
 		final List<Account> historyAccounts = new ArrayList<Account>(
