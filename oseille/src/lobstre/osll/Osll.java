@@ -22,6 +22,7 @@ import lobstre.osll.commands.ListBudget;
 import lobstre.osll.commands.ListDamocles;
 import lobstre.osll.commands.ListOperation;
 import lobstre.osll.commands.ListPrevision;
+import lobstre.osll.commands.LongPeriodSummary;
 import lobstre.osll.commands.MonteCarlo;
 import lobstre.osll.commands.NextCommit;
 import lobstre.osll.commands.NextSimulate;
@@ -106,9 +107,11 @@ public class Osll {
             {"nc", new NextCommit ()},
             {"next-simulate", new NextSimulate ()},
             {"ns", new NextSimulate ()},
-            {"monte-carlo", new MonteCarlo()},
-            {"mc", new MonteCarlo()},
-            {"average", new Average()},
-            {"av", new Average()},
+			{"monte-carlo", new MonteCarlo() },
+			{"mc", new MonteCarlo() }, 
+			{"average", new Average() },
+			{"av", new Average() },
+			{"long-period-summary", new LongPeriodSummary() },
+			{"lps", new LongPeriodSummary() },           
     });
 }
