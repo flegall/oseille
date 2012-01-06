@@ -10,7 +10,7 @@ I was told by [uucidl](https://github.com/uucidl) about [ledger](http://joyful.c
 I was too lazy to learn the double-entry book-keeping system and thought I could write something based on text files that could automate my way of doing it.
 Here is the result :)
 
-Basically, my two main concerns are to know how much I can save/spend each month.
+Basically, my main concern is to know how much I can save/spend each month.
 For this I need two things : 
 
   - Planning budgets
@@ -40,13 +40,13 @@ Each file contains :
 - A sequence of "Damocles" : a transaction that's been done but is not paid yet, it contains:
  - A category name.
  - An amount.
-- A sequence of previsions : a transaction that I plan to make (or should be automatically made at some time), it contains:
+- A sequence of previsions : a transaction that I plan to make during the period, it contains:
  - A category name.
  - An amount.
   
 # Life-cycle
 - Initialize a file with an initial amount. (commands: create set-initial)
-- Set budgets for all categories. (commands: create set-budget, adjust-budget, list-budget, list)
+- Set budgets for all categories. (commands: set-budget, adjust-budget, list-budget, list)
 - Add previsions for future planned payments (commands: add-prevision) 
 - For each expense/income that's been done but it not recorded yet: add a damocles or convert a prevision to a damocles. (commands: convert-prevision, add-damocles) 
 - When it's finally recorded on your bank account, convert it to an operation. (commands: convert-damocles, add-operation)
