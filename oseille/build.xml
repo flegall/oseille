@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<project name="osll" default="dist" basedir="." >
+<project name="oseille" default="dist" basedir="." >
 
   <target name="clean">
     <delete failonerror="false">
       <fileset dir="bin/" includes="**/*.class" />
       <fileset dir="bin/" includes="**/*.txt" />
-      <fileset dir="output/" includes="**/osll.jar" />
-      <fileset dir="output/" includes="**/osll.bat" />
-      <fileset dir="output/" includes="**/osll" />
+      <fileset dir="output/" includes="**/harpagon.jar" />
+      <fileset dir="output/" includes="**/harpagon.bat" />
+      <fileset dir="output/" includes="**/harpagon" />
     </delete>
   </target>  
   
@@ -19,12 +19,12 @@
   
   <target name="dist" depends="clean,build"
         description="generate the distribution" >
-    <jar jarfile="output/osll.jar" basedir="bin/">
+    <jar jarfile="output/harpagon.jar" basedir="bin/">
         <manifest>
-            <attribute name="Main-Class" value="lobstre.osll.Osll"/>
+            <attribute name="Main-Class" value="lobstre.oseille.Harpagon"/>
         </manifest>
    </jar>
-   <copy file="osll" todir="output/"/>
-   <copy file="osll.bat" todir="output/"/>
+   <copy file="harpagon" todir="output/"/>
+   <copy file="harpagon.bat" todir="output/"/>
   </target>
 </project>
