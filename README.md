@@ -16,7 +16,7 @@ For this I need two things :
   - Planning budgets
   - Keeping track on all expenses/incomes, especially the ones that don't appear immediately on my bank account web-site : french checks, late card payments...
 
-Technically : It works fully in command line, storage/persistence is based on human readable text files. It provides a single "osll" command to operate.
+Technically : It works fully in command line, storage/persistence is based on human readable text files. It provides a single "harpagon" command to operate.
 
 # Requirements
 Java 1.6
