@@ -4,7 +4,7 @@ My own personal accounting software.
 # About 
 A basic accounting software tool that fits my budget planning needs.
 I wrote this originally because I was doing very repetitive operations on spreadsheets for my personal accounting needs.
-The way I was keeping track of my expenses seemed ok for but needed some automation.
+The way I was keeping track of my expenses seemed ok for my needs but needed some automation.
 
 I was told by [uucidl](https://github.com/uucidl) about [ledger](http://joyful.com/darcsden/simon/ledger/doc/ledger.html).
 I was too lazy to learn the double-entry book-keeping system and thought I could write something based on text files that could automate my way of doing it.
