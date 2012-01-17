@@ -30,11 +30,11 @@ public class RebaseOperation implements Command {
     public void execute (final String fileName, final List<String> arguments) throws IOException, ParseException {
         final File file = new File (fileName);
         final Account acc = Parser.read (file);
+        final List<Operation> opers = acc.getOperations ();
         
         final int from = Integer.parseInt (arguments.get (0));
-        final int to = Integer.parseInt (arguments.get (0));
+        final int to = Integer.parseInt (arguments.get (1));
         
-        final List<Operation> opers = acc.getOperations ();
         final Operation out = opers.get (to);
         final Operation in = opers.get (from);
         opers.set (to, in);
