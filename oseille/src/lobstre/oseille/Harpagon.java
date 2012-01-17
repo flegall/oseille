@@ -26,7 +26,9 @@ import lobstre.oseille.commands.LongPeriodSummary;
 import lobstre.oseille.commands.MonteCarlo;
 import lobstre.oseille.commands.NextCommit;
 import lobstre.oseille.commands.NextSimulate;
+import lobstre.oseille.commands.RebaseDamocles;
 import lobstre.oseille.commands.RebaseOperation;
+import lobstre.oseille.commands.RebasePrevision;
 import lobstre.oseille.commands.RemoveDamocles;
 import lobstre.oseille.commands.RemoveOperation;
 import lobstre.oseille.commands.RemovePrevision;
@@ -116,5 +118,9 @@ public class Harpagon {
 			{"lps", new LongPeriodSummary() },     
 			{"rebase-operation", new RebaseOperation ()},
 			{"rbo", new RebaseOperation ()},
+	        {"rebase-damocles", new RebaseDamocles ()},
+            {"rbd", new RebaseDamocles ()},
+            {"rebase-prevision", new RebasePrevision ()},
+            {"rbp", new RebasePrevision ()},
     });
 }
