@@ -25,7 +25,10 @@ Java 1.6
 Use Ant to generate the jar file.
 
 # Usage 
-See syntax.txt to understand the syntax of the command line.
+
+- Build or download the jar file (harpagon.jar)[http://flegall.github.com/oseille/harpagon.jar] and the shell/batch scripts (harpagon)[http://flegall.github.com/oseille/harpagon] / (harpagaon.bat)[http://flegall.github.com/oseille/harpagon.bat]
+- Install the harpagon.jar and their script in a  directory
+- See syntax.txt to understand the syntax of the command line.
 
 # Data model
 Oseille's model works on account files.
