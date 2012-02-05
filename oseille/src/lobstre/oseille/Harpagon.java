@@ -33,7 +33,10 @@ import lobstre.oseille.commands.RemoveDamocles;
 import lobstre.oseille.commands.RemoveOperation;
 import lobstre.oseille.commands.RemovePrevision;
 import lobstre.oseille.commands.SetBudget;
+import lobstre.oseille.commands.SetDamocles;
 import lobstre.oseille.commands.SetInitial;
+import lobstre.oseille.commands.SetOperation;
+import lobstre.oseille.commands.SetPrevision;
 import lobstre.oseille.commands.Status;
 import lobstre.oseille.util.Util;
 
@@ -122,5 +125,11 @@ public class Harpagon {
             {"rbd", new RebaseDamocles ()},
             {"rebase-prevision", new RebasePrevision ()},
             {"rbp", new RebasePrevision ()},
+            {"set-operation", new SetOperation ()},
+            {"so", new SetOperation ()},
+            {"set-damocles", new SetDamocles ()},
+            {"sd", new SetDamocles ()},
+            {"set-prevision", new SetPrevision ()},
+            {"sp", new SetPrevision ()},
     });
 }

@@ -67,3 +67,21 @@
 * average
 ** harpagon 2010-08.txt average 2009-08.txt
 ** harpagon 2010-08.txt av 2009-08.txt
+* rebase-operation
+** harpagon 2010-08.txt rebase-operation 17 18
+** harpagon 2010-08.txt rbo 17 18
+* rebase-damocles
+** harpagon 2010-08.txt rebase-damocles 17 18
+** harpagon 2010-08.txt rbd 17 18
+* rebase-damocles
+** harpagon 2010-08.txt rebase-damocles 17 18
+** harpagon 2010-08.txt rbd 17 18
+* set-operation
+** harpagon 2010-08.txt set-operation 3 14.35
+** harpagon 2010-08.txt so 3 14.35
+* set-damocles
+** harpagon 2010-08.txt set-damocles 3 14.35
+** harpagon 2010-08.txt sd 3 14.35
+* set-prevision
+** harpagon 2010-08.txt set-prevision 3 14.35
+** harpagon 2010-08.txt sp 3 14.35
