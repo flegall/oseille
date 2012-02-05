@@ -51,6 +51,7 @@ Each file contains :
 - For each expense/income that's been done but it not recorded yet: add a damocles or convert a prevision to a damocles. (commands: convert-prevision, add-damocles) 
 - When it's finally recorded on your bank account, convert it to an operation. (commands: convert-damocles, add-operation)
 - Clean up unwanted items. (commands remove-operation, remove-damocles, remove-prevision)
+- Fix erroneous amounts (commands set-prevision, set-damocles, set-operation)
 - Reorder operations/damocles/previsions in order to match the actual/expected operation order (commands rebase-operation, rebase-damocles, rebase-prevision)
 - Print reports. (commands: list, list-budget, list-damocles, list-prevision, list-operation, status, monte-carlo, average) 
 - At the end of the period, end the current file and move the pending damocles & operations to the next file (commands: next-simulate, next-commit)
