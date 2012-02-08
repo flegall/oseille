@@ -34,6 +34,7 @@ import lobstre.oseille.commands.RemoveOperation;
 import lobstre.oseille.commands.RemovePrevision;
 import lobstre.oseille.commands.SetBudget;
 import lobstre.oseille.commands.SetDamocles;
+import lobstre.oseille.commands.SetDateOperation;
 import lobstre.oseille.commands.SetInitial;
 import lobstre.oseille.commands.SetOperation;
 import lobstre.oseille.commands.SetPrevision;
@@ -131,5 +132,7 @@ public class Harpagon {
             {"sd", new SetDamocles ()},
             {"set-prevision", new SetPrevision ()},
             {"sp", new SetPrevision ()},
+            {"set-date-operation", new SetDateOperation ()},
+            {"sdo", new SetDateOperation ()},
     });
 }

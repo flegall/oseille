@@ -85,3 +85,6 @@
 * set-prevision
 ** harpagon 2010-08.txt set-prevision 3 14.35
 ** harpagon 2010-08.txt sp 3 14.35
+* set-date-operation
+** harpagon 2010-08.txt set-date-operation 3 10-08-29
+** harpagon 2010-08.txt sdo 3 10-08-29
