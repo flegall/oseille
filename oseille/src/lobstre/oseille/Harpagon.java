@@ -39,6 +39,7 @@ import lobstre.oseille.commands.SetInitial;
 import lobstre.oseille.commands.SetOperation;
 import lobstre.oseille.commands.SetPrevision;
 import lobstre.oseille.commands.Status;
+import lobstre.oseille.util.TableRenderer;
 import lobstre.oseille.util.Util;
 
 public class Harpagon {
@@ -62,11 +63,33 @@ public class Harpagon {
                 }
             } else {
                 System.out.println ("Command : " + commandName+ " not found.");    
+                printCommands ();
             }
         } else {
             System.out.println ("Usage : Harpagon fileName COMMAND");
+            printCommands ();
         }
     }
+    
+    private static void printCommands () {
+        System.out.println ();
+        System.out.println ("Available commands: ");
+        
+        TableRenderer tr = new TableRenderer ();
+        int count = 0;
+        tr.left ("Command");
+        tr.left ("Shortcut");
+        tr.newLine ();
+        for (String cmd : COMMANDS.keySet ()) {
+            tr.left (cmd);
+            count++;
+            if (count % 2 == 0) {
+                tr.newLine ();
+            }
+        }
+        System.out.println (tr.toString ());
+    }
+    
     private static final Map<String, Command> COMMANDS = Util.asMap (new Object [][] {
             {"create", new Create ()},
             {"c", new Create ()},
