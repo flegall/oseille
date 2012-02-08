@@ -26,7 +26,7 @@ Use Ant to generate the jar file.
 
 # Usage 
 
-- Build or download the jar file (harpagon.jar)[http://flegall.github.com/oseille/harpagon.jar] and the shell/batch scripts (harpagon)[http://flegall.github.com/oseille/harpagon] / (harpagaon.bat)[http://flegall.github.com/oseille/harpagon.bat]
+- Build or download the jar file [harpagon.jar](http://flegall.github.com/oseille/harpagon.jar) and the shell/batch scripts [harpagon](http://flegall.github.com/oseille/harpagon) / [harpagaon.bat](http://flegall.github.com/oseille/harpagon.bat)
 - Install the harpagon.jar and their script in a  directory
 - See syntax.txt to understand the syntax of the command line.
 
@@ -55,7 +55,7 @@ Each file contains :
 - When it's finally recorded on your bank account, convert it to an operation. (commands: convert-damocles, add-operation)
 - Clean up unwanted items. (commands remove-operation, remove-damocles, remove-prevision)
 - Fix erroneous amounts (commands set-prevision, set-damocles, set-operation)
-- Fix erroneous dates (comman set-date-operation)
+- Fix erroneous dates (command set-date-operation)
 - Reorder operations/damocles/previsions in order to match the actual/expected operation order (commands rebase-operation, rebase-damocles, rebase-prevision)
 - Print reports. (commands: list, list-budget, list-damocles, list-prevision, list-operation, status, monte-carlo, average) 
 - At the end of the period, end the current file and move the pending damocles & operations to the next file (commands: next-simulate, next-commit)
