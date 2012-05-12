@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import lobstre.oseille.util.Util;
 
-public class UtilTest {
+public class UtilPaddingTest {
     public static void main (String[] args) {
         BigDecimal bd = Util.getBD ("1.5");
         System.out.println (bd);

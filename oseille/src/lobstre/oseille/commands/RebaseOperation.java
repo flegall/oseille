@@ -9,6 +9,7 @@ import java.util.List;
 import lobstre.oseille.Command;
 import lobstre.oseille.model.Account;
 import lobstre.oseille.parser.Parser;
+import lobstre.oseille.util.Util;
 
 public class RebaseOperation implements Command {
 
@@ -34,7 +35,7 @@ public class RebaseOperation implements Command {
         final File file = new File (fileName);
         final Account acc = Parser.read (file);
         
-        rebase (acc.getOperations (), arguments);
+        RebaseOperation.rebase (acc.getOperations (), arguments);
         
         ListAccount.renderOperations (acc);
         Parser.write (acc, file);   
@@ -43,10 +44,8 @@ public class RebaseOperation implements Command {
     public static <T> void rebase (final List<T> opers, final List<String> arguments) {
         final int from = Integer.parseInt (arguments.get (0));
         final int to = Integer.parseInt (arguments.get (1));
-        final T out = opers.get (to);
-        final T in = opers.get (from);
-        opers.set (to, in);
-        opers.set (from, out);
+    
+        Util.rebase (opers, from, to);
     }
 
 }
