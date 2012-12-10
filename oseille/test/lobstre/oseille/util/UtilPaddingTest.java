@@ -2,19 +2,22 @@ package lobstre.oseille.util;
 
 import java.math.BigDecimal;
 
-import lobstre.oseille.util.Util;
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 public class UtilPaddingTest {
-    public static void main (String[] args) {
+    @Test
+    public void test () {
         BigDecimal bd = Util.getBD ("1.5");
-        System.out.println (bd);
+        Assert.assertEquals (bd, new BigDecimal ("1.5"));
         
-        Util.padRight ("abc", 6);
-        Util.padRight ("abc", 3);
-        Util.padRight ("abc", 1);
+        Assert.assertEquals ("   abc", Util.padRight ("abc", 6));
+        Assert.assertEquals ("abc", Util.padRight ("abc", 3));
+        Assert.assertEquals ("c", Util.padRight ("abc", 1));
         
-        Util.padLeft ("abc", 6);
-        Util.padLeft ("abc", 3);
-        Util.padLeft ("abc", 1);
+        Assert.assertEquals ("abc   ", Util.padLeft ("abc", 6));
+        Assert.assertEquals ("abc", Util.padLeft ("abc", 3));
+        Assert.assertEquals ("a", Util.padLeft ("abc", 1));
     }
 }
