@@ -2,16 +2,24 @@ package lobstre.oseille.parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+
+import junit.framework.Assert;
 
 import lobstre.oseille.model.Account;
-import lobstre.oseille.parser.Parser;
+
+import org.junit.Test;
 
 public class ParserTest {
-    public static void main (String[] args) throws IOException {
+    @Test
+    public void test () throws IOException {
         Account account = Parser.read (new File ("test/test.txt"));
-        account.toString ();
+        Assert.assertEquals (account.getInitialAmount (), new BigDecimal ("300.0"));
+        
         Parser.write (account, new File ("test/test-output.txt"));
         Account account2 = Parser.read (new File ("test/test-output.txt"));
-        account2.toString ();
+        
+        Assert.assertEquals (account.getBudgets (), account2.getBudgets ());
+        Assert.assertEquals (account.getInitialAmount (), account2.getInitialAmount ());
     }
 }
