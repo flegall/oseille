@@ -1,5 +1,6 @@
-package lobstre.oseille.util;
+package util;
 
+import lobstre.oseille.util.Util;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ public class UtilRebaseTest {
     @Test
     public void test () {
         List<String> list = Arrays.asList ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
-        Util.rebase (list, 1, 7);
+        Util.rebase(list, 1, 7);
         assertEquals("[a, c, d, e, f, g, h, b, i, j, k, l, m]", list.toString());
         Util.rebase (list, 7, 1);
         assertEquals("[a, b, c, d, e, f, g, h, i, j, k, l, m]", list.toString());

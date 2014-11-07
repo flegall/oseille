@@ -1,6 +1,7 @@
-package lobstre.oseille.parser;
+package lobsre.oseille.parser;
 
 import lobstre.oseille.model.Account;
+import lobstre.oseille.parser.Parser;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class ParserTest {
     @Test
     public void test () throws IOException {
-        Account account = Parser.read (new File ("test-files/test.txt"));
+        Account account = Parser.read(new File("test-files/test.txt"));
         assertEquals(account.getInitialAmount(), new BigDecimal("300.0"));
         
         Parser.write (account, new File ("test-files/test-output.txt"));
