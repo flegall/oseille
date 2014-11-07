@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/flegall/oseille.svg?branch=master)](https://travis-ci.org/flegall/oseille)
+
+
 # Oseille 
 My own personal accounting software.
 
