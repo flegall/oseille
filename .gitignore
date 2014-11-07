@@ -1,10 +1,12 @@
-# Compiled source #
-###################
+# Compiled source 
 *.class
 *.jar
 oseille/output/*
 oseille/bin/*
 target
+
+# Idea
+.idea
 
 # Mac stuff
 .DS_Store
