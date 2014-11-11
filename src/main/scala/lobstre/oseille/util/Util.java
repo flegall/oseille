@@ -43,51 +43,6 @@ public class Util {
     }
 
     /**
-     * Pads or cuts a {@link String} to be aligned to the right.
-     * 
-     * @param value
-     *            the {@link String} value
-     * @param size
-     *            the text size
-     * @return a {@link String} of the desired size, including a cut or padded
-     *         copy of input {@link String}
-     */
-    public static String padRight (final String value, final int size) {
-        final int startIndex = size - value.length ();
-        final StringBuilder sb = new StringBuilder (size);
-        for (int i = 0; i < size; i++) {
-            sb.append (' ');
-            if (i >= startIndex) {
-                sb.setCharAt (i, value.charAt (i - startIndex));
-            }
-
-        }
-        return sb.toString ();
-    }
-
-    /**
-     * Pads or cuts a {@link String} to be aligned to the left.
-     * 
-     * @param value
-     *            the {@link String} value
-     * @param size
-     *            the text size
-     * @return a {@link String} of the desired size, including a cut or padded
-     *         copy of input {@link String}
-     */
-    public static String padLeft (final String value, final int padding) {
-        final StringBuilder sb = new StringBuilder (padding);
-        for (int i = 0; i < padding; i++) {
-            sb.append (' ');
-            if (i < value.length ()) {
-                sb.setCharAt (i, value.charAt (i));
-            }
-
-        }
-        return sb.toString ();
-    }
-
-    /**
      * Renders a Number as String using 0.00 decimal format.
      * 
      * @param value

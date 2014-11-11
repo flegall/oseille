@@ -4,19 +4,19 @@ import java.math.BigDecimal
 
 import org.scalatest._
 
-class Util_Padding_Spec extends FlatSpec with Matchers {
-  behavior of "Util.Padding()"
+class Padding_Spec extends FlatSpec with Matchers {
+  behavior of "Padding"
 
   it should "pad right correctly" in {
-    assert("   abc" == Util.padRight("abc", 6))
-    assert("abc" == Util.padRight("abc", 3))
-    assert("c" == Util.padRight("abc", 1))
+    assert("   abc" == Padding.padRight("abc", 6))
+    assert("abc" == Padding.padRight("abc", 3))
+    assert("c" == Padding.padRight("abc", 1))
   }
 
   it should "pad left correctly" in {
-    assert("abc   " == Util.padLeft("abc", 6))
-    assert("abc" == Util.padLeft("abc", 3))
-    assert("a" == Util.padLeft("abc", 1))
+    assert("abc   " == Padding.padLeft("abc", 6))
+    assert("abc" == Padding.padLeft("abc", 3))
+    assert("a" == Padding.padLeft("abc", 1))
   }
 }
 

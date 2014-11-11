@@ -85,7 +85,7 @@ public class TableRenderer {
 
         @Override
         public String render (int size) {
-            return Util.padLeft (getText (), size);
+            return Padding.padLeft(getText (), size);
         }
 
     }
@@ -98,7 +98,7 @@ public class TableRenderer {
 
         @Override
         public String render (int size) {
-            return Util.padRight (getText (), size);
+            return Padding.padRight(getText (), size);
         }
 
     }
