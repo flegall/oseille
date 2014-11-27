@@ -12,18 +12,13 @@ case object Padding {
    *                   copy of input { @link String}
    */
   def padLeft(value: String, padding: Int): String = {
-    val sb = new StringBuilder(padding)
-    var i = 0
-    while (i < padding) {
-      {
-        sb.append(' ')
-        if (i < value.length) {
-          sb.setCharAt(i, value.charAt(i))
-        }
-        i += 1
-      }
+    if (value.length == padding) {
+      value
+    } else if (value.length > padding) {
+      value substring(0, padding)
+    } else {
+      value + " " * (padding - value.length);
     }
-    sb.toString()
   }
 
   /**
