@@ -6,18 +6,18 @@ case object Padding {
    *
    * @param value
      * the { @link String} value
-   * @param padding
+   * @param size
      * the text size
    * @return a { @link String} of the desired size, including a cut or padded
    *                   copy of input { @link String}
    */
-  def padLeft(value: String, padding: Int): String = {
-    if (value.length == padding) {
+  def padLeft(value: String, size: Int): String = {
+    if (value.length == size) {
       value
-    } else if (value.length > padding) {
-      value substring(0, padding)
+    } else if (value.length > size) {
+      value substring(0, size)
     } else {
-      value + " " * (padding - value.length);
+      value + " " * (size - value.length)
     }
   }
 
@@ -32,18 +32,12 @@ case object Padding {
    *                   copy of input { @link String}
    */
   def padRight(value: String, size: Int): String = {
-    val startIndex = size - value.length
-    val sb = new StringBuilder(size)
-    var i: Int = 0
-    while (i < size) {
-      {
-        sb.append(' ')
-        if (i >= startIndex) {
-          sb.setCharAt(i, value.charAt(i - startIndex))
-        }
-        i += 1
-      }
+    if (value.length == size) {
+      value
+    } else if (value.length > size) {
+      value substring(value.length - size, value.length)
+    } else {
+      " " * (size - value.length) + value
     }
-    sb.toString()
   }
 }
