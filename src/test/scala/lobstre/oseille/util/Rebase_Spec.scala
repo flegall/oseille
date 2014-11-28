@@ -1,6 +1,5 @@
 package lobstre.oseille.util
 
-import java.util
 import java.util.Arrays.asList
 
 import lobstre.oseille.util.Util.rebase
@@ -10,7 +9,7 @@ class Rebase_Spec extends FlatSpec with Matchers {
   behavior of "Rebase"
 
   it should "rebase properly" in {
-    val list: util.List[String] = asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
+    val list = asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
 
     rebase(list, 1, 7)
     assert("[a, c, d, e, f, g, h, b, i, j, k, l, m]" == list.toString)
