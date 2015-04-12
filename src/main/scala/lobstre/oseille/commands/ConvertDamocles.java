@@ -7,9 +7,9 @@ import java.util.List;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Damocles;
+import lobstre.oseille.model.MutableDamocles;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
+import lobstre.oseille.model.MutableOperation;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -34,10 +34,10 @@ public class ConvertDamocles implements Command {
 
         final int index = Integer.parseInt (arguments.get (0));
 
-        final Damocles damocles = acc.getDamocleses ().get (index);
+        final MutableDamocles damocles = acc.getDamocleses ().get (index);
         acc.getDamocleses ().remove (index);
         
-        final Operation op = new Operation ();
+        final MutableOperation op = new MutableOperation ();
         op.setAmount (arguments.size () == 3 ? Util.getBD (arguments.get (2)) : damocles.getAmount ());
         op.setCategory (damocles.getCategory ());
         op.setDate (arguments.get (1));

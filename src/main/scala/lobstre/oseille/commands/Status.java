@@ -9,9 +9,9 @@ import java.util.Map;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Damocles;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.model.Prevision;
+import lobstre.oseille.model.MutableDamocles;
+import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.MutablePrevision;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
 import lobstre.oseille.util.Util;
@@ -50,7 +50,7 @@ public class Status implements Command {
             tr.left (key);
             BigDecimal sumInCurrentCategory = BigDecimal.valueOf (0L);
 
-            for (final Operation o : account.getOperations ()) {
+            for (final MutableOperation o : account.getOperations ()) {
                 if (o.getCategory () != null && key != null && o.getCategory ().equals (key)) {
                     sumInCurrentCategory = sumInCurrentCategory.add (o.getAmount ());
                 }
@@ -59,7 +59,7 @@ public class Status implements Command {
 
             tr.right (Util.renderNumber (sumInCurrentCategory));
 
-            for (final Damocles d : account.getDamocleses ()) {
+            for (final MutableDamocles d : account.getDamocleses ()) {
                 if (d.getCategory () != null && key != null && d.getCategory ().equals (key)) {
                     sumInCurrentCategory = sumInCurrentCategory.add (d.getAmount ());
                 }
@@ -68,7 +68,7 @@ public class Status implements Command {
 
             soon = soon.subtract (sumInCurrentCategory);
 
-            for (final Prevision o : account.getPrevisions ()) {
+            for (final MutablePrevision o : account.getPrevisions ()) {
                 if (o.getCategory () != null && key != null && o.getCategory ().equals (key)) {
                     sumInCurrentCategory = sumInCurrentCategory.add (o.getAmount ());
                 }

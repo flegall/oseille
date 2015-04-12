@@ -1,9 +1,9 @@
 package lobstre.oseille.commands;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Damocles;
+import lobstre.oseille.model.MutableDamocles;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Prevision;
+import lobstre.oseille.model.MutablePrevision;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -33,10 +33,10 @@ public class ConvertPrevision implements Command {
 
         final int index = Integer.parseInt (arguments.get (0));
 
-        final Prevision prevision = acc.getPrevisions ().get (index);
+        final MutablePrevision prevision = acc.getPrevisions ().get (index);
         acc.getPrevisions ().remove (index);
         
-        final Damocles d = new Damocles ();
+        final MutableDamocles d = new MutableDamocles ();
         d.setAmount (arguments.size () == 2 ? Util.getBD (arguments.get (1)) : prevision.getAmount ());
         d.setCategory (prevision.getCategory ());
         d.setLabel (prevision.getLabel ());

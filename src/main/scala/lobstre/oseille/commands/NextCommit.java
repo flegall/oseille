@@ -18,9 +18,9 @@ import java.util.TreeSet;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Damocles;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.model.Prevision;
+import lobstre.oseille.model.MutableDamocles;
+import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.MutablePrevision;
 import lobstre.oseille.parser.Parser;
 
 public class NextCommit implements Command {
@@ -52,8 +52,8 @@ public class NextCommit implements Command {
     }
 
     public static void next (final String fileName, final List<String> arguments, final boolean commit) throws IOException {
-        final List<Prevision> templatePrevisions;
-        final List<Damocles> templateDamocleses;
+        final List<MutablePrevision> templatePrevisions;
+        final List<MutableDamocles> templateDamocleses;
         if (arguments.size () == 3) {
             // If has template file : Add template previsions & damocles
             final File templateFile = new File (arguments.get (2));
@@ -72,7 +72,7 @@ public class NextCommit implements Command {
 
         // Compute the remaining amount
         BigDecimal remainingAmount = current.getInitialAmount ();
-        for (final Operation op : current.getOperations ()) {
+        for (final MutableOperation op : current.getOperations ()) {
             remainingAmount = remainingAmount.subtract (op.getAmount ());
         }
 
@@ -115,7 +115,7 @@ public class NextCommit implements Command {
         final Map<String, List<BigDecimal>> totalsAverage = new TreeMap<String, List<BigDecimal>> ();
         for (final MutableAccount acc : historyAccounts) {
             final Map<String, BigDecimal> totals = new TreeMap<String, BigDecimal> ();
-            for (final Operation op : acc.getOperations ()) {
+            for (final MutableOperation op : acc.getOperations ()) {
                 BigDecimal total = totals.get (op.getCategory ());
                 if (null == total) {
                     total = BigDecimal.valueOf (0);

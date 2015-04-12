@@ -1,9 +1,9 @@
 package lobstre.oseille.parser;
 
-import lobstre.oseille.model.Damocles;
+import lobstre.oseille.model.MutableDamocles;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.model.Prevision;
+import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.MutablePrevision;
 import lobstre.oseille.util.Util;
 
 import java.io.*;
@@ -36,7 +36,7 @@ public class Parser {
                 }
                 if (line.startsWith (PREVISION_TOKEN)) {
                     check (PREVISION_TOKEN, split, 4);
-                    final Prevision p = new Prevision ();
+                    final MutablePrevision p = new MutablePrevision ();
                     p.setCategory (split[1]);
                     p.setLabel (split[2]);
                     p.setAmount (Util.getBD (split[3]));
@@ -44,7 +44,7 @@ public class Parser {
                 }                
                 if (line.startsWith (DAMOCLES_TOKEN)) {
                     check (DAMOCLES_TOKEN, split, 4);
-                    final Damocles dc = new Damocles ();
+                    final MutableDamocles dc = new MutableDamocles ();
                     dc.setCategory (split[1]);
                     dc.setLabel (split[2]);
                     dc.setAmount (Util.getBD (split[3]));
@@ -52,7 +52,7 @@ public class Parser {
                 }
                 if (line.startsWith (OPERATION_TOKEN)) {
                     check (OPERATION_TOKEN, split, 5);
-                    final Operation o = new Operation ();
+                    final MutableOperation o = new MutableOperation ();
                     o.setCategory (split[1]);
                     o.setLabel (split[2]);
                     o.setAmount (Util.getBD (split[3]));
@@ -79,13 +79,13 @@ public class Parser {
             for (final Map.Entry<String, BigDecimal> b : acc.getBudgets ().entrySet ()) {
                 pw.println (BUDGET_TOKEN + b.getKey () + ":" + b.getValue ());
             }
-            for (final Prevision p : acc.getPrevisions ()) {
+            for (final MutablePrevision p : acc.getPrevisions ()) {
                 pw.println (PREVISION_TOKEN + p.getCategory () + ":" + p.getLabel () + ":" + p.getAmount ());
             }            
-            for (final Damocles d : acc.getDamocleses ()) {
+            for (final MutableDamocles d : acc.getDamocleses ()) {
                 pw.println (DAMOCLES_TOKEN + d.getCategory () + ":" + d.getLabel () + ":" + d.getAmount ());
             }
-            for (final Operation o : acc.getOperations ()) {
+            for (final MutableOperation o : acc.getOperations ()) {
                 pw.println (OPERATION_TOKEN + o.getCategory () + ":" + o.getLabel () + ":" + o.getAmount () + ":" + o.getDate ());
             }
         } finally {
@@ -94,17 +94,17 @@ public class Parser {
     }
 
     private static void initZeroBudgets (final MutableAccount acc) {
-        for (final Prevision p : acc.getPrevisions ()) {
+        for (final MutablePrevision p : acc.getPrevisions ()) {
             if (!acc.getBudgets ().containsKey (p.getCategory ())) {
                 acc.getBudgets ().put (p.getCategory (), BigDecimal.valueOf (0));
             }
         }
-        for (final Damocles d : acc.getDamocleses ()) {
+        for (final MutableDamocles d : acc.getDamocleses ()) {
             if (!acc.getBudgets ().containsKey (d.getCategory ())) {
                 acc.getBudgets ().put (d.getCategory (), BigDecimal.valueOf (0));
             }
         }
-        for (final Operation o : acc.getOperations ()) {
+        for (final MutableOperation o : acc.getOperations ()) {
             if (!acc.getBudgets ().containsKey (o.getCategory ())) {
                 acc.getBudgets ().put (o.getCategory (), BigDecimal.valueOf (0));
             }

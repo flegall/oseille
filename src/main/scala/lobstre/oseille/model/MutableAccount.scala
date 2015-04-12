@@ -11,8 +11,8 @@ class MutableAccount {
 
   def sortOperations {
     val comparator: StringComparator = new StringComparator
-    val operationsComparator: Comparator[Operation] = new Comparator[Operation] {
-      override def compare(o1: Operation, o2: Operation): Int = {
+    val operationsComparator: Comparator[MutableOperation] = new Comparator[MutableOperation] {
+      override def compare(o1: MutableOperation, o2: MutableOperation): Int = {
         comparator.compare(o1.getDate, o2.getDate)
       }
     }
@@ -31,21 +31,21 @@ class MutableAccount {
     budgets
   }
 
-  def getPrevisions: util.List[Prevision] = {
+  def getPrevisions: util.List[MutablePrevision] = {
     previsions
   }
 
-  def getDamocleses: util.List[Damocles] = {
+  def getDamocleses: util.List[MutableDamocles] = {
     damocleses
   }
 
-  def getOperations: util.List[Operation] = {
+  def getOperations: util.List[MutableOperation] = {
     operations
   }
 
   private var initialAmount: BigDecimal = null
   private final val budgets: util.NavigableMap[String, BigDecimal] = new util.TreeMap[String, BigDecimal]
-  private final val previsions: util.List[Prevision] = new util.ArrayList[Prevision]
-  private final val damocleses: util.List[Damocles] = new util.ArrayList[Damocles]
-  private final val operations: util.List[Operation] = new util.ArrayList[Operation]
+  private final val previsions: util.List[MutablePrevision] = new util.ArrayList[MutablePrevision]
+  private final val damocleses: util.List[MutableDamocles] = new util.ArrayList[MutableDamocles]
+  private final val operations: util.List[MutableOperation] = new util.ArrayList[MutableOperation]
 }

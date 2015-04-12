@@ -8,7 +8,7 @@ import java.util.List;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Damocles;
+import lobstre.oseille.model.MutableDamocles;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -32,7 +32,7 @@ public class AddDamocles implements Command {
         final String label = arguments.get (1);
         final BigDecimal amount = Util.getBD (arguments.get (2));
         
-        final Damocles d = new Damocles ();
+        final MutableDamocles d = new MutableDamocles ();
         d.setAmount (amount);
         d.setCategory (category);
         d.setLabel (label);

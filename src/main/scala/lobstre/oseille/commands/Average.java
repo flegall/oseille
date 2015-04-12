@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
+import lobstre.oseille.model.MutableOperation;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
 import lobstre.oseille.util.Util;
@@ -64,7 +64,7 @@ public class Average implements Command {
 
             BigDecimal currentValue = acc.getInitialAmount ();
             String currentDate = acc.getOperations ().iterator ().next ().getDate ();
-            for (final Operation op : acc.getOperations ()) {
+            for (final MutableOperation op : acc.getOperations ()) {
                 final String dateString = op.getDate ();
                 if (!currentDate.equals (dateString)) {
                     final Date date = MonteCarlo.DATE_FORMAT.parse (currentDate);
@@ -105,15 +105,15 @@ public class Average implements Command {
         }
 
         final MutableAccount account = Parser.read (new File (fileName));
-        final Operation firstOperation = account.getOperations ().get (0);
+        final MutableOperation firstOperation = account.getOperations ().get (0);
         final Date firstDate = MonteCarlo.DATE_FORMAT.parse (firstOperation.getDate ());
-        final Operation lastOperation = account.getOperations ().get (account.getOperations ().size () - 1);
+        final MutableOperation lastOperation = account.getOperations ().get (account.getOperations ().size () - 1);
         final Date targetDate = MonteCarlo.DATE_FORMAT.parse (lastOperation.getDate ());
         final int currentDate = MonteCarlo.delta (firstDate, targetDate);
         
         BigDecimal currentValue = account.getInitialAmount ();
         final NavigableMap<Integer, BigDecimal> currentValues = new TreeMap<Integer, BigDecimal> ();
-        for (final Operation op : account.getOperations ()) {
+        for (final MutableOperation op : account.getOperations ()) {
             final Date curDate = MonteCarlo.DATE_FORMAT.parse (op.getDate ());
             final int delta = MonteCarlo.delta (firstDate, curDate);
             currentValue = currentValue.subtract (op.getAmount ());

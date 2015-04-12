@@ -1,18 +1,17 @@
 package lobstre.oseille.commands;
 
+import lobstre.oseille.Command;
+import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.model.MutableDamocles;
+import lobstre.oseille.model.MutablePrevision;
+import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.parser.Parser;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
-
-import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Damocles;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.model.Prevision;
-import lobstre.oseille.parser.Parser;
 
 public class AdjustBudget implements Command {
 
@@ -40,19 +39,19 @@ public class AdjustBudget implements Command {
     public static void adjustBudget (final MutableAccount acc, final String category) {
         BigDecimal sumInCurrentCategory = BigDecimal.valueOf (0);
         
-        for (final Operation o : acc.getOperations ()) {
+        for (final MutableOperation o : acc.getOperations ()) {
             if (o.getCategory () != null && category != null && o.getCategory ().equals (category)) {
                 sumInCurrentCategory = sumInCurrentCategory.add (o.getAmount ());
             }
         }
 
-        for (final Damocles d : acc.getDamocleses ()) {
+        for (final MutableDamocles d : acc.getDamocleses ()) {
             if (d.getCategory () != null && category != null && d.getCategory ().equals (category)) {
                 sumInCurrentCategory = sumInCurrentCategory.add (d.getAmount ());
             }
         }
         
-        for (final Prevision p : acc.getPrevisions ()) {
+        for (final MutablePrevision p : acc.getPrevisions ()) {
             if (p.getCategory () != null && category != null && p.getCategory ().equals (category)) {
                 sumInCurrentCategory = sumInCurrentCategory.add (p.getAmount ());
             }

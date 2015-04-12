@@ -8,7 +8,7 @@ import java.util.List;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Prevision;
+import lobstre.oseille.model.MutablePrevision;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -32,7 +32,7 @@ public class AddPrevision implements Command {
         final String label = arguments.get (1);
         final BigDecimal amount = Util.getBD (arguments.get (2));
         
-        final Prevision p = new Prevision ();
+        final MutablePrevision p = new MutablePrevision ();
         p.setAmount (amount);
         p.setCategory (category);
         p.setLabel (label);

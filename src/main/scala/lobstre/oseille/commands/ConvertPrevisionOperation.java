@@ -7,8 +7,8 @@ import java.util.List;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.model.Prevision;
+import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.MutablePrevision;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -33,10 +33,10 @@ public class ConvertPrevisionOperation implements Command {
 
         final int index = Integer.parseInt (arguments.get (0));
 
-        final Prevision p = acc.getPrevisions ().get (index);
+        final MutablePrevision p = acc.getPrevisions ().get (index);
         acc.getPrevisions ().remove (index);
         
-        final Operation op = new Operation ();
+        final MutableOperation op = new MutableOperation ();
         op.setAmount (arguments.size () == 3 ? Util.getBD (arguments.get (2)) : p.getAmount ());
         op.setCategory (p.getCategory ());
         op.setDate (arguments.get (1));

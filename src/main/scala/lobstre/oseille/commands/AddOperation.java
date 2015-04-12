@@ -2,7 +2,7 @@ package lobstre.oseille.commands;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
+import lobstre.oseille.model.MutableOperation;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -33,7 +33,7 @@ public class AddOperation implements Command {
         final BigDecimal amount = Util.getBD (arguments.get (2));
         final String date = arguments.get (3);
         
-        final Operation o = new Operation ();
+        final MutableOperation o = new MutableOperation ();
         o.setAmount (amount);
         o.setCategory (category);
         o.setLabel (label);

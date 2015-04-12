@@ -2,7 +2,7 @@ package lobstre.oseille.commands;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
+import lobstre.oseille.model.MutableOperation;
 import lobstre.oseille.parser.Parser;
 
 import java.io.File;
@@ -28,8 +28,8 @@ public class SetDateOperation implements Command {
         
         final File file = new File (fileName);
         final MutableAccount acc = Parser.read (file);
-        
-        Operation op = acc.getOperations ().get (index);
+
+        MutableOperation op = acc.getOperations ().get (index);
         op.setDate (date);
         
         ListAccount.renderOperations (acc);

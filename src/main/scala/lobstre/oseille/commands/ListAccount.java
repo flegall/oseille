@@ -40,7 +40,7 @@ public class ListAccount implements Command {
         
         int count = 0;
         final TableRenderer tr = new TableRenderer();
-        for (final Operation o : account.getOperations ()) {
+        for (final MutableOperation o : account.getOperations ()) {
           tr.right(Integer.toString(count));
           tr.left(o.getCategory());
           tr.left(o.getLabel());
@@ -62,7 +62,7 @@ public class ListAccount implements Command {
 
         int count = 0;
         final TableRenderer tr = new TableRenderer ();
-        for (final Prevision p : account.getPrevisions ()) {
+        for (final MutablePrevision p : account.getPrevisions ()) {
             tr.left (Integer.toString (count));
             tr.left (p.getCategory ());
             tr.left (p.getLabel ());
@@ -78,7 +78,7 @@ public class ListAccount implements Command {
 
         int count = 0;
         final TableRenderer tr = new TableRenderer ();
-        for (final Damocles d : account.getDamocleses ()) {
+        for (final MutableDamocles d : account.getDamocleses ()) {
             tr.left (Integer.toString (count));
             tr.left (d.getCategory ());
             tr.left (d.getLabel ());

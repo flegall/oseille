@@ -2,7 +2,7 @@ package lobstre.oseille.commands;
 
 import lobstre.oseille.Command;
 import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.Operation;
+import lobstre.oseille.model.MutableOperation;
 import lobstre.oseille.parser.Parser;
 
 import java.io.File;
@@ -54,7 +54,7 @@ public class MonteCarlo implements Command {
 		// Enumerate all categories
 		final Map<String, List<List<Op>>> universe = new TreeMap<String, List<List<Op>>>();
 		for (final MutableAccount acc : historyAccounts) {
-			for (final Operation op : acc.getOperations()) {
+			for (final MutableOperation op : acc.getOperations()) {
 				universe.put(op.getCategory(), new ArrayList<List<Op>>());
 			}
 		}
@@ -68,7 +68,7 @@ public class MonteCarlo implements Command {
 					.entrySet()) {
 				final List<Op> list = new ArrayList<Op>();
 				e.getValue().add(list);
-				for (final Operation o : acc.getOperations()) {
+				for (final MutableOperation o : acc.getOperations()) {
 					if (o.getCategory().equals(e.getKey())) {
 						final String dateString = o.getDate();
 						final Date date = DATE_FORMAT.parse(dateString);
@@ -83,20 +83,20 @@ public class MonteCarlo implements Command {
 		}
 
 		final MutableAccount account = Parser.read(new File(fileName));
-		final Operation firstOperation = account.getOperations().get(0);
+		final MutableOperation firstOperation = account.getOperations().get(0);
 		final Date firstDate = DATE_FORMAT.parse(firstOperation.getDate());
 		final Date targetDate;
 		if (arguments.size() == 2) {
 			targetDate = DATE_FORMAT.parse(arguments.get(1));
 		} else {
-			final Operation lastOperation = account.getOperations().get(
+			final MutableOperation lastOperation = account.getOperations().get(
 					account.getOperations().size() - 1);
 			targetDate = DATE_FORMAT.parse(lastOperation.getDate());
 		}
 
 		final int currentDate = delta(firstDate, targetDate);
 		double currentBalance = account.getInitialAmount().doubleValue();
-		for (final Operation o : account.getOperations()) {
+		for (final MutableOperation o : account.getOperations()) {
 			final Date opDate = DATE_FORMAT.parse(o.getDate());
 			final int delta = delta(firstDate, opDate);
 			if (delta <= currentDate) {
