@@ -1,26 +1,16 @@
 package lobstre.oseille.commands;
 
+import lobstre.oseille.Command;
+import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.model.Operation;
+import lobstre.oseille.parser.Parser;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.NavigableSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
-import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.parser.Parser;
+import java.util.*;
 
 public class MonteCarlo implements Command {
 
@@ -54,7 +44,7 @@ public class MonteCarlo implements Command {
 				true, fileName, false);
 
 		// Parse all history accounts
-		final List<Account> historyAccounts = new ArrayList<Account>(subSet
+		final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount>(subSet
 				.size());
 		for (final String hFileName : subSet) {
 			final File hFile = new File(hFileName);
@@ -63,14 +53,14 @@ public class MonteCarlo implements Command {
 
 		// Enumerate all categories
 		final Map<String, List<List<Op>>> universe = new TreeMap<String, List<List<Op>>>();
-		for (final Account acc : historyAccounts) {
+		for (final MutableAccount acc : historyAccounts) {
 			for (final Operation op : acc.getOperations()) {
 				universe.put(op.getCategory(), new ArrayList<List<Op>>());
 			}
 		}
 
 		// Filling universe
-		for (final Account acc : historyAccounts) {
+		for (final MutableAccount acc : historyAccounts) {
 			final String firstDateString = acc.getOperations().iterator()
 					.next().getDate();
 			final Date firstDate = DATE_FORMAT.parse(firstDateString);
@@ -92,7 +82,7 @@ public class MonteCarlo implements Command {
 			}
 		}
 
-		final Account account = Parser.read(new File(fileName));
+		final MutableAccount account = Parser.read(new File(fileName));
 		final Operation firstOperation = account.getOperations().get(0);
 		final Date firstDate = DATE_FORMAT.parse(firstOperation.getDate());
 		final Date targetDate;

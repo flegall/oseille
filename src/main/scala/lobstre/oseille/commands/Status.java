@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Damocles;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.model.Prevision;
@@ -25,12 +25,12 @@ public class Status implements Command {
     @Override
     public void execute (final String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final Account account = Parser.read (file);
+        final MutableAccount account = Parser.read (file);
 
         printStatus (account);
     }
 
-    public static void printStatus (final Account account) {
+    public static void printStatus (final MutableAccount account) {
         BigDecimal endBudget = account.getInitialAmount ();
         BigDecimal endPrevision = account.getInitialAmount ();
         BigDecimal currently = account.getInitialAmount ();

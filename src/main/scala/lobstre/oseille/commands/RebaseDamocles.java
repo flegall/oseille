@@ -1,14 +1,14 @@
 package lobstre.oseille.commands;
 
+import lobstre.oseille.Command;
+import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.parser.Parser;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
-
-import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
-import lobstre.oseille.parser.Parser;
 
 public class RebaseDamocles implements Command {
 
@@ -20,7 +20,7 @@ public class RebaseDamocles implements Command {
     @Override
     public void execute (final String fileName, final List<String> arguments) throws IOException, ParseException {
         final File file = new File (fileName);
-        final Account acc = Parser.read (file);
+        final MutableAccount acc = Parser.read (file);
         
         RebaseOperation.rebase (acc.getDamocleses (), arguments);
         

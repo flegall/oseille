@@ -7,8 +7,9 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Damocles;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.model.Prevision;
 import lobstre.oseille.parser.Parser;
@@ -25,7 +26,7 @@ public class AdjustBudget implements Command {
     @Override
     public void execute (String fileName, List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final Account acc = Parser.read (file);
+        final MutableAccount acc = Parser.read (file);
         
         final String category = arguments.get (0);
         
@@ -36,7 +37,7 @@ public class AdjustBudget implements Command {
         Parser.write (acc, file);
     }
 
-    public static void adjustBudget (final Account acc, final String category) {
+    public static void adjustBudget (final MutableAccount acc, final String category) {
         BigDecimal sumInCurrentCategory = BigDecimal.valueOf (0);
         
         for (final Operation o : acc.getOperations ()) {

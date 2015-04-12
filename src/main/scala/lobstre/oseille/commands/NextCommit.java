@@ -17,7 +17,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Damocles;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.model.Prevision;
@@ -57,7 +57,7 @@ public class NextCommit implements Command {
         if (arguments.size () == 3) {
             // If has template file : Add template previsions & damocles
             final File templateFile = new File (arguments.get (2));
-            final Account templateAcc = Parser.read (templateFile);
+            final MutableAccount templateAcc = Parser.read (templateFile);
             templatePrevisions = templateAcc.getPrevisions ();
             templateDamocleses = templateAcc.getDamocleses ();
         } else {
@@ -68,7 +68,7 @@ public class NextCommit implements Command {
 
         // Loads the current file
         final File currentFile = new File (arguments.get (1));
-        final Account current = Parser.read (currentFile);
+        final MutableAccount current = Parser.read (currentFile);
 
         // Compute the remaining amount
         BigDecimal remainingAmount = current.getInitialAmount ();
@@ -77,7 +77,7 @@ public class NextCommit implements Command {
         }
 
         // Create target account with remaining amount
-        final Account targetAccount = new Account ();
+        final MutableAccount targetAccount = new MutableAccount ();
         targetAccount.setInitialAmount (remainingAmount);
 
         // Move all previsions & damocleses from current to target
@@ -104,7 +104,7 @@ public class NextCommit implements Command {
         final NavigableSet<String> subSet = fileNames.subSet (arguments.get (0), true, arguments.get (1), false);
 
         // Parse all history accounts
-        final List<Account> historyAccounts = new ArrayList<Account> (subSet.size () + 1);
+        final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount> (subSet.size () + 1);
         for (final String hFileName : subSet) {
             final File hFile = new File (hFileName);
             historyAccounts.add (Parser.read (hFile));
@@ -113,7 +113,7 @@ public class NextCommit implements Command {
 
         // Compute average per files
         final Map<String, List<BigDecimal>> totalsAverage = new TreeMap<String, List<BigDecimal>> ();
-        for (final Account acc : historyAccounts) {
+        for (final MutableAccount acc : historyAccounts) {
             final Map<String, BigDecimal> totals = new TreeMap<String, BigDecimal> ();
             for (final Operation op : acc.getOperations ()) {
                 BigDecimal total = totals.get (op.getCategory ());

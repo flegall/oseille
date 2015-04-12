@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Damocles;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
@@ -26,7 +26,7 @@ public class AddDamocles implements Command {
     @Override
     public void execute (String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final Account acc = Parser.read (file);
+        final MutableAccount acc = Parser.read (file);
         
         final String category = arguments.get (0);
         final String label = arguments.get (1);

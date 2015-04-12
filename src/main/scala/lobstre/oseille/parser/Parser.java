@@ -1,18 +1,14 @@
 package lobstre.oseille.parser;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.util.Map;
-
-import lobstre.oseille.model.Account;
 import lobstre.oseille.model.Damocles;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.model.Prevision;
 import lobstre.oseille.util.Util;
+
+import java.io.*;
+import java.math.BigDecimal;
+import java.util.Map;
 
 public class Parser {
     private static final String INIT_TOKEN = "init:";
@@ -21,8 +17,8 @@ public class Parser {
     private static final String DAMOCLES_TOKEN = "damocles:";
     private static final String OPERATION_TOKEN = "operation:";
 
-    public static Account read (final File file) throws IOException {
-        final Account acc = new Account ();
+    public static MutableAccount read (final File file) throws IOException {
+        final MutableAccount acc = new MutableAccount();
         
         final BufferedReader in = new BufferedReader (new FileReader (file));
         try {
@@ -73,7 +69,7 @@ public class Parser {
         return acc;
     }
     
-    public static void write (final Account acc, final File file) throws IOException {
+    public static void write (final MutableAccount acc, final File file) throws IOException {
         acc.sortOperations ();
         initZeroBudgets (acc);
         
@@ -97,7 +93,7 @@ public class Parser {
         }
     }
 
-    private static void initZeroBudgets (final Account acc) {
+    private static void initZeroBudgets (final MutableAccount acc) {
         for (final Prevision p : acc.getPrevisions ()) {
             if (!acc.getBudgets ().containsKey (p.getCategory ())) {
                 acc.getBudgets ().put (p.getCategory (), BigDecimal.valueOf (0));

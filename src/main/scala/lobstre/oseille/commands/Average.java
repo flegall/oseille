@@ -15,7 +15,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
@@ -44,14 +44,14 @@ public class Average implements Command {
         final NavigableSet<String> historyFileNames = allFileNames.subSet (arguments.get (0), true, fileName, false);
 
         // Parse all history accounts
-        final List<Account> historyAccounts = new ArrayList<Account> (historyFileNames.size ());
+        final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount> (historyFileNames.size ());
         for (final String hFileName : historyFileNames) {
             final File hFile = new File (hFileName);
             historyAccounts.add (Parser.read (hFile));
         }
 
         final NavigableMap<Integer, Double> totalSums = new TreeMap<Integer, Double> ();
-        for (final Account acc : historyAccounts) {
+        for (final MutableAccount acc : historyAccounts) {
             final NavigableMap<Integer, Double> sums = new TreeMap<Integer, Double> ();
             Double initValue = sums.get (Integer.valueOf (-1));
             if (null == initValue) {
@@ -104,7 +104,7 @@ public class Average implements Command {
             totalSums.put (i, sum);
         }
 
-        final Account account = Parser.read (new File (fileName));
+        final MutableAccount account = Parser.read (new File (fileName));
         final Operation firstOperation = account.getOperations ().get (0);
         final Date firstDate = MonteCarlo.DATE_FORMAT.parse (firstOperation.getDate ());
         final Operation lastOperation = account.getOperations ().get (account.getOperations ().size () - 1);

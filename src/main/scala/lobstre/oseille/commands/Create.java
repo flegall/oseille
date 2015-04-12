@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -14,7 +14,7 @@ public class Create implements Command {
 
     @Override
     public void execute (String fileName, final List<String> arguments) throws IOException {
-        final Account acc = new Account ();
+        final MutableAccount acc = new MutableAccount ();
         
         acc.setInitialAmount (Util.getBD (arguments.get (0)));
         

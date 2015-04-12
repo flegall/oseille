@@ -1,19 +1,16 @@
 package lobstre.oseille.commands;
 
+import lobstre.oseille.Command;
+import lobstre.oseille.model.*;
+import lobstre.oseille.parser.Parser;
+import lobstre.oseille.util.TableRenderer;
+import lobstre.oseille.util.Util;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
-
-import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
-import lobstre.oseille.model.Damocles;
-import lobstre.oseille.model.Operation;
-import lobstre.oseille.model.Prevision;
-import lobstre.oseille.parser.Parser;
-import lobstre.oseille.util.TableRenderer;
-import lobstre.oseille.util.Util;
 
 public class ListAccount implements Command {
 
@@ -24,12 +21,12 @@ public class ListAccount implements Command {
     @Override
     public void execute (String fileName, final java.util.List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final Account account = Parser.read (file);
+        final MutableAccount account = Parser.read (file);
         
         listAccount (account);
     }
 
-    public static void listAccount (final Account account) {
+    public static void listAccount (final MutableAccount account) {
         renderInitialAmount (account);
         renderBudgets (account);
         renderPrevisions (account);
@@ -37,7 +34,7 @@ public class ListAccount implements Command {
         renderOperations (account);
     }
 
-    public static void renderOperations (final Account account) {
+    public static void renderOperations (final MutableAccount account) {
         account.sortOperations ();
         System.out.println ("Operations: ");
         
@@ -55,12 +52,12 @@ public class ListAccount implements Command {
         System.out.print(tr.toString());
     }
 
-    public static void renderInitialAmount (final Account account) {
+    public static void renderInitialAmount (final MutableAccount account) {
         System.out.println ("Initial amount: " + Util.renderNumber (account.getInitialAmount ()));
         System.out.println ();
     }
     
-    public static void renderPrevisions (final Account account) {
+    public static void renderPrevisions (final MutableAccount account) {
         System.out.println ("Previsions: ");
 
         int count = 0;
@@ -76,7 +73,7 @@ public class ListAccount implements Command {
         System.out.print (tr.toString ());
     }
 
-    public static void renderDamocles (final Account account) {
+    public static void renderDamocles (final MutableAccount account) {
         System.out.println ("Damocles: ");
 
         int count = 0;
@@ -92,7 +89,7 @@ public class ListAccount implements Command {
         System.out.print (tr.toString ());
     }
 
-    public static void renderBudgets (final Account account) {
+    public static void renderBudgets (final MutableAccount account) {
         System.out.println ("Budgets: ");
         
         final TableRenderer tr = new TableRenderer();

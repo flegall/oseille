@@ -14,7 +14,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
@@ -43,7 +43,7 @@ public class LongPeriodSummary implements Command {
 				true, fileName, true);
 
 		// Parse all history accounts
-		final List<Account> historyAccounts = new ArrayList<Account>(
+		final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount>(
 				subSet.size());
 		for (final String hFileName : subSet) {
 			final File hFile = new File(hFileName);
@@ -52,7 +52,7 @@ public class LongPeriodSummary implements Command {
 
 		// Fill all operations in a Map<String, List<Operation>>
 		final Map<String, BigDecimal> totals = new TreeMap<String, BigDecimal>();
-		for (final Account acc : historyAccounts) {
+		for (final MutableAccount acc : historyAccounts) {
 			for (final Operation op : acc.getOperations()) {
 				BigDecimal total = totals.get(op.getCategory());
 				if (null == total) {

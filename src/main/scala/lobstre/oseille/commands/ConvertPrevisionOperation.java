@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.Account;
+import lobstre.oseille.model.MutableAccount;
 import lobstre.oseille.model.Operation;
 import lobstre.oseille.model.Prevision;
 import lobstre.oseille.parser.Parser;
@@ -29,7 +29,7 @@ public class ConvertPrevisionOperation implements Command {
     @Override
     public void execute (String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final Account acc = Parser.read (file);
+        final MutableAccount acc = Parser.read (file);
 
         final int index = Integer.parseInt (arguments.get (0));
 
