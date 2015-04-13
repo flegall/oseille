@@ -1,5 +1,7 @@
 package lobstre.oseille.model
 
+import org.threeten.bp.LocalDate
+
 sealed trait Expense {
   def category: String
   def label: String
@@ -12,7 +14,7 @@ case class Damocles(category: String, label: String, amount: BigDecimal)
 case class Prevision(category: String, label: String, amount: BigDecimal)
   extends Expense
 
-case class Operation(category: String, label: String, amount: BigDecimal, date: String)
+case class Operation(category: String, label: String, amount: BigDecimal, date: LocalDate)
   extends Expense
 
 case class Account(initialAmount: BigDecimal,
