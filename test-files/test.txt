@@ -1,4 +1,8 @@
 init:300.0
-budget:car:100
-damocles:car:plein-essence:45.75
-operation:car:plein-essence:45.75:10-08-2010
+budget:car:600
+prevision:car:vidange:25.75
+prevision:car:vidange:25.75
+damocles:car:plein-essence:55.75
+operation:car:plein-essence:45.75:10-08-10
+operation:car:plein-essence:45.75:10-08-10
+operation:car:plein-essence:45.75:10-08-10
