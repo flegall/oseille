@@ -12,7 +12,7 @@ class Parser_Spec extends FlatSpec with Matchers {
   it should "parse accounts correctly" in {
     val account = read(new File("test-files/test.txt"))
 
-    assert(account.getInitialAmount == new BigDecimal("300.0"))
+    account.getInitialAmount shouldBe new BigDecimal("300.0")
   }
 
   it should "write accounts correctly" in {
@@ -21,6 +21,6 @@ class Parser_Spec extends FlatSpec with Matchers {
     write(original, new File("test-files/test-output.txt"))
     val copy = read(new File("test-files/test-output.txt"))
 
-    assert(original.getBudgets == copy.getBudgets)
+    original.getBudgets shouldBe copy.getBudgets
   }
 }

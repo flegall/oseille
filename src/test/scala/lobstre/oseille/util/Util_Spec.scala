@@ -10,15 +10,15 @@ class Padding_Spec extends FlatSpec with Matchers {
   behavior of "Padding"
 
   it should "pad right correctly" in {
-    assert("   abc" == padRight("abc", 6))
-    assert("abc" == padRight("abc", 3))
-    assert("c" == padRight("abc", 1))
+    "   abc" shouldBe padRight("abc", 6)
+    "abc" shouldBe padRight("abc", 3)
+    "c" shouldBe padRight("abc", 1)
   }
 
   it should "pad left correctly" in {
-    assert("abc   " == padLeft("abc", 6))
-    assert("abc" == padLeft("abc", 3))
-    assert("a" == padLeft("abc", 1))
+    "abc   " shouldBe padLeft("abc", 6)
+    "abc" shouldBe padLeft("abc", 3)
+    "a" shouldBe padLeft("abc", 1)
   }
 }
 
@@ -27,6 +27,6 @@ class Util_getBD_Spec extends FlatSpec with Matchers {
 
   it should "parse a big decimal correctly" in {
     val bd = getBD("1.5")
-    assert(bd == new BigDecimal("1.5"))
+    bd shouldBe new BigDecimal("1.5")
   }
 }
