@@ -1,8 +1,8 @@
 package lobstre.oseille.commands;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.AccountBuilder;
+import lobstre.oseille.model.OperationBuilder;
 import lobstre.oseille.parser.Parser;
 
 import java.io.File;
@@ -35,8 +35,9 @@ public class MonteCarlo implements Command {
 	public void execute(final String fileName, final List<String> arguments)
 			throws IOException, ParseException {
 		// List all history files
+		@SuppressWarnings("ConstantConditions")
 		final List<File> files = Arrays.asList(new File(".").listFiles());
-		final NavigableSet<String> fileNames = new TreeSet<String>();
+		final NavigableSet<String> fileNames = new TreeSet<>();
 		for (final File file : files) {
 			fileNames.add(file.getName());
 		}
@@ -44,31 +45,31 @@ public class MonteCarlo implements Command {
 				true, fileName, false);
 
 		// Parse all history accounts
-		final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount>(subSet
-				.size());
+		final List<AccountBuilder> historyAccounts = new ArrayList<>(subSet
+                .size());
 		for (final String hFileName : subSet) {
 			final File hFile = new File(hFileName);
 			historyAccounts.add(Parser.read(hFile));
 		}
 
 		// Enumerate all categories
-		final Map<String, List<List<Op>>> universe = new TreeMap<String, List<List<Op>>>();
-		for (final MutableAccount acc : historyAccounts) {
-			for (final MutableOperation op : acc.getOperations()) {
+		final Map<String, List<List<Op>>> universe = new TreeMap<>();
+		for (final AccountBuilder acc : historyAccounts) {
+			for (final OperationBuilder op : acc.getOperations()) {
 				universe.put(op.getCategory(), new ArrayList<List<Op>>());
 			}
 		}
 
 		// Filling universe
-		for (final MutableAccount acc : historyAccounts) {
+		for (final AccountBuilder acc : historyAccounts) {
 			final String firstDateString = acc.getOperations().iterator()
 					.next().getDate();
 			final Date firstDate = DATE_FORMAT.parse(firstDateString);
 			for (final Map.Entry<String, List<List<Op>>> e : universe
 					.entrySet()) {
-				final List<Op> list = new ArrayList<Op>();
+				final List<Op> list = new ArrayList<>();
 				e.getValue().add(list);
-				for (final MutableOperation o : acc.getOperations()) {
+				for (final OperationBuilder o : acc.getOperations()) {
 					if (o.getCategory().equals(e.getKey())) {
 						final String dateString = o.getDate();
 						final Date date = DATE_FORMAT.parse(dateString);
@@ -82,21 +83,21 @@ public class MonteCarlo implements Command {
 			}
 		}
 
-		final MutableAccount account = Parser.read(new File(fileName));
-		final MutableOperation firstOperation = account.getOperations().get(0);
+		final AccountBuilder account = Parser.read(new File(fileName));
+		final OperationBuilder firstOperation = account.getOperations().get(0);
 		final Date firstDate = DATE_FORMAT.parse(firstOperation.getDate());
 		final Date targetDate;
 		if (arguments.size() == 2) {
 			targetDate = DATE_FORMAT.parse(arguments.get(1));
 		} else {
-			final MutableOperation lastOperation = account.getOperations().get(
+			final OperationBuilder lastOperation = account.getOperations().get(
 					account.getOperations().size() - 1);
 			targetDate = DATE_FORMAT.parse(lastOperation.getDate());
 		}
 
 		final int currentDate = delta(firstDate, targetDate);
 		double currentBalance = account.getInitialAmount().doubleValue();
-		for (final MutableOperation o : account.getOperations()) {
+		for (final OperationBuilder o : account.getOperations()) {
 			final Date opDate = DATE_FORMAT.parse(o.getDate());
 			final int delta = delta(firstDate, opDate);
 			if (delta <= currentDate) {
@@ -108,11 +109,11 @@ public class MonteCarlo implements Command {
 		System.out.println("Current balance : " + round (currentBalance));
 		System.out.println();
 
-		final List<Estimation> estimations = new ArrayList<Estimation>();
+		final List<Estimation> estimations = new ArrayList<>();
 		for (int i = 0; i < 1000; i++) {
 			final List<Op> month = month(universe);
 			double result = currentBalance;
-			final Collection<Op> operations = new ArrayList<Op>();
+			final Collection<Op> operations = new ArrayList<>();
 			for (final Op op : month) {
 				if (op.date > currentDate) {
 					result -= op.amount;
@@ -165,7 +166,7 @@ public class MonteCarlo implements Command {
 	}
 
 	private List<Op> month(final Map<String, List<List<Op>>> universe) {
-		final List<Op> operations = new ArrayList<Op>();
+		final List<Op> operations = new ArrayList<>();
 		for (final List<List<Op>> opsByCurrentCateg : universe.values()) {
 			final int randomIndex = (int) (Math.random() * (opsByCurrentCateg
 					.size()));

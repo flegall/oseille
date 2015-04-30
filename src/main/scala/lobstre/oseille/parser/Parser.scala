@@ -14,12 +14,12 @@ object Parser {
   private val OPERATION_TOKEN: String = "operation:"
 
   def readAccount(file: File): Account = {
-    val mutableAccount: MutableAccount = read(file)
+    val mutableAccount: AccountBuilder = read(file)
     mutableAccount.build()
   }
 
-  def read(file: File): MutableAccount = {
-    val acc: MutableAccount = new MutableAccount
+  def read(file: File): AccountBuilder = {
+    val acc: AccountBuilder = new AccountBuilder
     val in: BufferedReader = new BufferedReader(new FileReader(file))
     try {
       var line: String = null
@@ -39,7 +39,7 @@ object Parser {
         }
         if (line.startsWith(PREVISION_TOKEN)) {
           check(PREVISION_TOKEN, split, 4)
-          val p: MutablePrevision = new MutablePrevision
+          val p: PrevisionBuilder = new PrevisionBuilder
           p.setCategory(split(1))
           p.setLabel(split(2))
           p.setAmount(Util.getBD(split(3)))
@@ -47,7 +47,7 @@ object Parser {
         }
         if (line.startsWith(DAMOCLES_TOKEN)) {
           check(DAMOCLES_TOKEN, split, 4)
-          val dc: MutableDamocles = new MutableDamocles
+          val dc: DamoclesBuilder = new DamoclesBuilder
           dc.setCategory(split(1))
           dc.setLabel(split(2))
           dc.setAmount(Util.getBD(split(3)))
@@ -55,7 +55,7 @@ object Parser {
         }
         if (line.startsWith(OPERATION_TOKEN)) {
           check(OPERATION_TOKEN, split, 5)
-          val o: MutableOperation = new MutableOperation
+          val o: OperationBuilder = new OperationBuilder
           o.setCategory(split(1))
           o.setLabel(split(2))
           o.setAmount(Util.getBD(split(3)))
@@ -67,12 +67,12 @@ object Parser {
       in.close()
     }
     initZeroBudgets(acc)
-    acc.sortOperations
+    acc.sortOperations()
     acc
   }
 
-  def write(acc: MutableAccount, file: File) {
-    acc.sortOperations
+  def write(acc: AccountBuilder, file: File) {
+    acc.sortOperations()
     initZeroBudgets(acc)
     val pw: PrintWriter = new PrintWriter(file)
     try {
@@ -98,7 +98,7 @@ object Parser {
     }
   }
 
-  private def initZeroBudgets(acc: MutableAccount) {
+  private def initZeroBudgets(acc: AccountBuilder) {
     import scala.collection.JavaConversions._
     for (p <- acc.getPrevisions) {
       if (!acc.getBudgets.containsKey(p.getCategory)) {

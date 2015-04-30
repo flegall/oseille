@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.MutableDamocles;
-import lobstre.oseille.model.MutableOperation;
-import lobstre.oseille.model.MutablePrevision;
+import lobstre.oseille.model.AccountBuilder;
+import lobstre.oseille.model.DamoclesBuilder;
+import lobstre.oseille.model.OperationBuilder;
+import lobstre.oseille.model.PrevisionBuilder;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
 import lobstre.oseille.util.Util;
@@ -25,12 +25,12 @@ public class Status implements Command {
     @Override
     public void execute (final String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount account = Parser.read (file);
+        final AccountBuilder account = Parser.read (file);
 
         printStatus (account);
     }
 
-    public static void printStatus (final MutableAccount account) {
+    public static void printStatus (final AccountBuilder account) {
         BigDecimal endBudget = account.getInitialAmount ();
         BigDecimal endPrevision = account.getInitialAmount ();
         BigDecimal currently = account.getInitialAmount ();
@@ -50,7 +50,7 @@ public class Status implements Command {
             tr.left (key);
             BigDecimal sumInCurrentCategory = BigDecimal.valueOf (0L);
 
-            for (final MutableOperation o : account.getOperations ()) {
+            for (final OperationBuilder o : account.getOperations ()) {
                 if (o.getCategory () != null && key != null && o.getCategory ().equals (key)) {
                     sumInCurrentCategory = sumInCurrentCategory.add (o.getAmount ());
                 }
@@ -59,7 +59,7 @@ public class Status implements Command {
 
             tr.right (Util.renderNumber (sumInCurrentCategory));
 
-            for (final MutableDamocles d : account.getDamocleses ()) {
+            for (final DamoclesBuilder d : account.getDamocleses ()) {
                 if (d.getCategory () != null && key != null && d.getCategory ().equals (key)) {
                     sumInCurrentCategory = sumInCurrentCategory.add (d.getAmount ());
                 }
@@ -68,7 +68,7 @@ public class Status implements Command {
 
             soon = soon.subtract (sumInCurrentCategory);
 
-            for (final MutablePrevision o : account.getPrevisions ()) {
+            for (final PrevisionBuilder o : account.getPrevisions ()) {
                 if (o.getCategory () != null && key != null && o.getCategory ().equals (key)) {
                     sumInCurrentCategory = sumInCurrentCategory.add (o.getAmount ());
                 }

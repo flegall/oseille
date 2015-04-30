@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.model.AccountBuilder;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -29,7 +29,7 @@ public class SetOperation implements Command {
         final BigDecimal amount = Util.getBD (arguments.get (1));
         
         final File file = new File (fileName);
-        final MutableAccount acc = Parser.read (file);
+        final AccountBuilder acc = Parser.read (file);
         acc.getOperations ().get (index).setAmount (amount);
         Parser.write (acc, file);
         

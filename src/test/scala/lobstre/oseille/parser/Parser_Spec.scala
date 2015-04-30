@@ -3,7 +3,7 @@ package lobstre.oseille.parser
 import java.io.File
 import java.math.BigDecimal
 
-import lobstre.oseille.model.MutableDamocles
+import lobstre.oseille.model.DamoclesBuilder
 import lobstre.oseille.parser.Parser.{readAccount, read, write}
 import lobstre.oseille.util.Util
 import lobstre.oseille.util.Util.bigDecimal

@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.MutableOperation;
-import lobstre.oseille.model.MutablePrevision;
+import lobstre.oseille.model.AccountBuilder;
+import lobstre.oseille.model.OperationBuilder;
+import lobstre.oseille.model.PrevisionBuilder;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -19,6 +19,7 @@ public class ConvertPrevisionOperation implements Command {
         if (arguments.size () != 2 && arguments.size () != 3) {
             errors.add ("Usage : convert-prevision-operation index date [amount]");
         } else {
+            //noinspection ResultOfMethodCallIgnored
             Integer.parseInt (arguments.get (0));
             if (arguments.size () == 3) {
                 Util.getBD (arguments.get (2));
@@ -29,14 +30,14 @@ public class ConvertPrevisionOperation implements Command {
     @Override
     public void execute (String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount acc = Parser.read (file);
+        final AccountBuilder acc = Parser.read (file);
 
         final int index = Integer.parseInt (arguments.get (0));
 
-        final MutablePrevision p = acc.getPrevisions ().get (index);
+        final PrevisionBuilder p = acc.getPrevisions ().get (index);
         acc.getPrevisions ().remove (index);
         
-        final MutableOperation op = new MutableOperation ();
+        final OperationBuilder op = new OperationBuilder();
         op.setAmount (arguments.size () == 3 ? Util.getBD (arguments.get (2)) : p.getAmount ());
         op.setCategory (p.getCategory ());
         op.setDate (arguments.get (1));

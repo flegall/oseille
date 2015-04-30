@@ -21,12 +21,12 @@ public class ListAccount implements Command {
     @Override
     public void execute (String fileName, final java.util.List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount account = Parser.read (file);
+        final AccountBuilder account = Parser.read (file);
         
         listAccount (account);
     }
 
-    public static void listAccount (final MutableAccount account) {
+    public static void listAccount (final AccountBuilder account) {
         renderInitialAmount (account);
         renderBudgets (account);
         renderPrevisions (account);
@@ -34,13 +34,13 @@ public class ListAccount implements Command {
         renderOperations (account);
     }
 
-    public static void renderOperations (final MutableAccount account) {
+    public static void renderOperations (final AccountBuilder account) {
         account.sortOperations ();
         System.out.println ("Operations: ");
         
         int count = 0;
         final TableRenderer tr = new TableRenderer();
-        for (final MutableOperation o : account.getOperations ()) {
+        for (final OperationBuilder o : account.getOperations ()) {
           tr.right(Integer.toString(count));
           tr.left(o.getCategory());
           tr.left(o.getLabel());
@@ -52,17 +52,17 @@ public class ListAccount implements Command {
         System.out.print(tr.toString());
     }
 
-    public static void renderInitialAmount (final MutableAccount account) {
+    public static void renderInitialAmount (final AccountBuilder account) {
         System.out.println ("Initial amount: " + Util.renderNumber (account.getInitialAmount ()));
         System.out.println ();
     }
     
-    public static void renderPrevisions (final MutableAccount account) {
+    public static void renderPrevisions (final AccountBuilder account) {
         System.out.println ("Previsions: ");
 
         int count = 0;
         final TableRenderer tr = new TableRenderer ();
-        for (final MutablePrevision p : account.getPrevisions ()) {
+        for (final PrevisionBuilder p : account.getPrevisions ()) {
             tr.left (Integer.toString (count));
             tr.left (p.getCategory ());
             tr.left (p.getLabel ());
@@ -73,12 +73,12 @@ public class ListAccount implements Command {
         System.out.print (tr.toString ());
     }
 
-    public static void renderDamocles (final MutableAccount account) {
+    public static void renderDamocles (final AccountBuilder account) {
         System.out.println ("Damocles: ");
 
         int count = 0;
         final TableRenderer tr = new TableRenderer ();
-        for (final MutableDamocles d : account.getDamocleses ()) {
+        for (final DamoclesBuilder d : account.getDamocleses ()) {
             tr.left (Integer.toString (count));
             tr.left (d.getCategory ());
             tr.left (d.getLabel ());
@@ -89,7 +89,7 @@ public class ListAccount implements Command {
         System.out.print (tr.toString ());
     }
 
-    public static void renderBudgets (final MutableAccount account) {
+    public static void renderBudgets (final AccountBuilder account) {
         System.out.println ("Budgets: ");
         
         final TableRenderer tr = new TableRenderer();

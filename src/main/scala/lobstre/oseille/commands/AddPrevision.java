@@ -7,8 +7,8 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.MutablePrevision;
+import lobstre.oseille.model.AccountBuilder;
+import lobstre.oseille.model.PrevisionBuilder;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.Util;
 
@@ -26,13 +26,13 @@ public class AddPrevision implements Command {
     @Override
     public void execute (String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount acc = Parser.read (file);
+        final AccountBuilder acc = Parser.read (file);
         
         final String category = arguments.get (0);
         final String label = arguments.get (1);
         final BigDecimal amount = Util.getBD (arguments.get (2));
         
-        final MutablePrevision p = new MutablePrevision ();
+        final PrevisionBuilder p = new PrevisionBuilder();
         p.setAmount (amount);
         p.setCategory (category);
         p.setLabel (label);

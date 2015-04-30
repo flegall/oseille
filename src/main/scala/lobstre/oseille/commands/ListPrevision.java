@@ -1,7 +1,7 @@
 package lobstre.oseille.commands;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.model.AccountBuilder;
 import lobstre.oseille.parser.Parser;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class ListPrevision implements Command {
     @Override
     public void execute (String fileName, List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount account = Parser.read (file);
+        final AccountBuilder account = Parser.read (file);
         
         lobstre.oseille.commands.ListAccount.renderPrevisions (account);
     }

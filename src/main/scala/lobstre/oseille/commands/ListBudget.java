@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.model.AccountBuilder;
 import lobstre.oseille.parser.Parser;
 
 public class ListBudget implements Command {
@@ -18,7 +18,7 @@ public class ListBudget implements Command {
     @Override
     public void execute (String fileName, List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount account = Parser.read (file);
+        final AccountBuilder account = Parser.read (file);
         
         lobstre.oseille.commands.ListAccount.renderBudgets (account);
     }

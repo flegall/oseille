@@ -15,8 +15,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.AccountBuilder;
+import lobstre.oseille.model.OperationBuilder;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
 import lobstre.oseille.util.Util;
@@ -36,35 +36,36 @@ public class Average implements Command {
     @Override
     public void execute (final String fileName, final List<String> arguments) throws IOException, ParseException {
         // List all history files
+        @SuppressWarnings("ConstantConditions")
         final List<File> allFiles = Arrays.asList (new File (".").listFiles ());
-        final NavigableSet<String> allFileNames = new TreeSet<String> ();
+        final NavigableSet<String> allFileNames = new TreeSet<>();
         for (final File file : allFiles) {
             allFileNames.add (file.getName ());
         }
         final NavigableSet<String> historyFileNames = allFileNames.subSet (arguments.get (0), true, fileName, false);
 
         // Parse all history accounts
-        final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount> (historyFileNames.size ());
+        final List<AccountBuilder> historyAccounts = new ArrayList<>(historyFileNames.size());
         for (final String hFileName : historyFileNames) {
             final File hFile = new File (hFileName);
             historyAccounts.add (Parser.read (hFile));
         }
 
-        final NavigableMap<Integer, Double> totalSums = new TreeMap<Integer, Double> ();
-        for (final MutableAccount acc : historyAccounts) {
-            final NavigableMap<Integer, Double> sums = new TreeMap<Integer, Double> ();
-            Double initValue = sums.get (Integer.valueOf (-1));
+        final NavigableMap<Integer, Double> totalSums = new TreeMap<>();
+        for (final AccountBuilder acc : historyAccounts) {
+            final NavigableMap<Integer, Double> sums = new TreeMap<>();
+            Double initValue = sums.get (-1);
             if (null == initValue) {
                 initValue = 0.0;
             }
-            sums.put (Integer.valueOf (-1), initValue + acc.getInitialAmount ().doubleValue ());
+            sums.put (-1, initValue + acc.getInitialAmount ().doubleValue ());
 
             final String firstDateString = acc.getOperations ().iterator ().next ().getDate ();
             final Date firstDate = MonteCarlo.DATE_FORMAT.parse (firstDateString);
 
             BigDecimal currentValue = acc.getInitialAmount ();
             String currentDate = acc.getOperations ().iterator ().next ().getDate ();
-            for (final MutableOperation op : acc.getOperations ()) {
+            for (final OperationBuilder op : acc.getOperations ()) {
                 final String dateString = op.getDate ();
                 if (!currentDate.equals (dateString)) {
                     final Date date = MonteCarlo.DATE_FORMAT.parse (currentDate);
@@ -104,16 +105,16 @@ public class Average implements Command {
             totalSums.put (i, sum);
         }
 
-        final MutableAccount account = Parser.read (new File (fileName));
-        final MutableOperation firstOperation = account.getOperations ().get (0);
+        final AccountBuilder account = Parser.read (new File (fileName));
+        final OperationBuilder firstOperation = account.getOperations ().get (0);
         final Date firstDate = MonteCarlo.DATE_FORMAT.parse (firstOperation.getDate ());
-        final MutableOperation lastOperation = account.getOperations ().get (account.getOperations ().size () - 1);
+        final OperationBuilder lastOperation = account.getOperations ().get (account.getOperations ().size () - 1);
         final Date targetDate = MonteCarlo.DATE_FORMAT.parse (lastOperation.getDate ());
         final int currentDate = MonteCarlo.delta (firstDate, targetDate);
         
         BigDecimal currentValue = account.getInitialAmount ();
-        final NavigableMap<Integer, BigDecimal> currentValues = new TreeMap<Integer, BigDecimal> ();
-        for (final MutableOperation op : account.getOperations ()) {
+        final NavigableMap<Integer, BigDecimal> currentValues = new TreeMap<>();
+        for (final OperationBuilder op : account.getOperations ()) {
             final Date curDate = MonteCarlo.DATE_FORMAT.parse (op.getDate ());
             final int delta = MonteCarlo.delta (firstDate, curDate);
             currentValue = currentValue.subtract (op.getAmount ());

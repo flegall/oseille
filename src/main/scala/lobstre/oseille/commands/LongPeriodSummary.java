@@ -14,8 +14,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
-import lobstre.oseille.model.MutableOperation;
+import lobstre.oseille.model.AccountBuilder;
+import lobstre.oseille.model.OperationBuilder;
 import lobstre.oseille.parser.Parser;
 import lobstre.oseille.util.TableRenderer;
 import lobstre.oseille.util.Util;
@@ -34,8 +34,9 @@ public class LongPeriodSummary implements Command {
 	public void execute(String fileName, List<String> arguments)
 			throws IOException, ParseException {
 		// List all history files
+		@SuppressWarnings("ConstantConditions")
 		final List<File> files = Arrays.asList(new File(".").listFiles());
-		final NavigableSet<String> fileNames = new TreeSet<String>();
+		final NavigableSet<String> fileNames = new TreeSet<>();
 		for (final File file : files) {
 			fileNames.add(file.getName());
 		}
@@ -43,17 +44,17 @@ public class LongPeriodSummary implements Command {
 				true, fileName, true);
 
 		// Parse all history accounts
-		final List<MutableAccount> historyAccounts = new ArrayList<MutableAccount>(
-				subSet.size());
+		final List<AccountBuilder> historyAccounts = new ArrayList<>(
+                subSet.size());
 		for (final String hFileName : subSet) {
 			final File hFile = new File(hFileName);
 			historyAccounts.add(Parser.read(hFile));
 		}
 
 		// Fill all operations in a Map<String, List<Operation>>
-		final Map<String, BigDecimal> totals = new TreeMap<String, BigDecimal>();
-		for (final MutableAccount acc : historyAccounts) {
-			for (final MutableOperation op : acc.getOperations()) {
+		final Map<String, BigDecimal> totals = new TreeMap<>();
+		for (final AccountBuilder acc : historyAccounts) {
+			for (final OperationBuilder op : acc.getOperations()) {
 				BigDecimal total = totals.get(op.getCategory());
 				if (null == total) {
 					total = new BigDecimal(0);

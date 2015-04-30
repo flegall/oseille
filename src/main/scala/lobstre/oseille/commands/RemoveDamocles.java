@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lobstre.oseille.Command;
-import lobstre.oseille.model.MutableAccount;
+import lobstre.oseille.model.AccountBuilder;
 import lobstre.oseille.parser.Parser;
 
 public class RemoveDamocles implements Command {
@@ -16,6 +16,7 @@ public class RemoveDamocles implements Command {
         if (arguments.size () != 1) {
             errors.add ("Usage : remove-damocles index");
         } else {
+            //noinspection ResultOfMethodCallIgnored
             Integer.parseInt (arguments.get (0));
         }
     }
@@ -23,7 +24,7 @@ public class RemoveDamocles implements Command {
     @Override
     public void execute (final String fileName, final List<String> arguments) throws IOException {
         final File file = new File (fileName);
-        final MutableAccount acc = Parser.read (file);
+        final AccountBuilder acc = Parser.read (file);
         
         final int index = Integer.parseInt (arguments.get (0));
         

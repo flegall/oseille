@@ -8,11 +8,11 @@ import org.threeten.bp.LocalDate._
 import org.threeten.bp.format.DateTimeFormatter._
 
 
-class MutableAccount {
-  def sortOperations {
+class AccountBuilder {
+  def sortOperations() {
     val comparator: StringComparator = new StringComparator
-    val operationsComparator: Comparator[MutableOperation] = new Comparator[MutableOperation] {
-      override def compare(o1: MutableOperation, o2: MutableOperation): Int = {
+    val operationsComparator: Comparator[OperationBuilder] = new Comparator[OperationBuilder] {
+      override def compare(o1: OperationBuilder, o2: OperationBuilder): Int = {
         comparator.compare(o1.getDate, o2.getDate)
       }
     }
@@ -31,27 +31,27 @@ class MutableAccount {
     budgets
   }
 
-  def getPrevisions: java.util.List[MutablePrevision] = {
+  def getPrevisions: java.util.List[PrevisionBuilder] = {
     previsions
   }
 
-  def getDamocleses: java.util.List[MutableDamocles] = {
+  def getDamocleses: java.util.List[DamoclesBuilder] = {
     damocleses
   }
 
-  def getOperations: java.util.List[MutableOperation] = {
+  def getOperations: java.util.List[OperationBuilder] = {
     operations
   }
 
   def build(): Account = {
     Account(initialAmount = initialAmount,
-      budgets = buildBudgets(),
-      damocleses = toDamocleses(),
-      previsions = toPrevisions(),
-      operations = toOperations())
+      budgets = buildBudgets,
+      damocleses = toDamocleses,
+      previsions = toPrevisions,
+      operations = toOperations)
   }
 
-  private def buildBudgets(): Map[String, BigDecimal] = {
+  private def buildBudgets: Map[String, BigDecimal] = {
     import scala.collection.JavaConversions._
 
     budgets.map {
@@ -60,19 +60,19 @@ class MutableAccount {
     }.toMap
   }
 
-  private def toDamocleses(): Seq[Damocles] = {
+  private def toDamocleses: Seq[Damocles] = {
     import scala.collection.JavaConversions._
 
     damocleses.map { mutableDamocles => mutableDamocles.build() }
   }
 
-  private def toPrevisions(): Seq[Prevision] = {
+  private def toPrevisions: Seq[Prevision] = {
     import scala.collection.JavaConversions._
 
     previsions.map { mutablePrevision => mutablePrevision.build()}
   }
 
-  private def toOperations(): Seq[Operation] = {
+  private def toOperations: Seq[Operation] = {
     import scala.collection.JavaConversions._
 
     operations.map { mutableOperation => mutableOperation.build()}
@@ -81,12 +81,12 @@ class MutableAccount {
 
   private var initialAmount:  java.math.BigDecimal = null
   private final val budgets: java.util.NavigableMap[String, java.math.BigDecimal] = new java.util.TreeMap[String, java.math.BigDecimal]
-  private final val previsions: java.util.List[MutablePrevision] = new java.util.ArrayList[MutablePrevision]
-  private final val damocleses: java.util.List[MutableDamocles] = new java.util.ArrayList[MutableDamocles]
-  private final val operations: java.util.List[MutableOperation] = new java.util.ArrayList[MutableOperation]
+  private final val previsions: java.util.List[PrevisionBuilder] = new java.util.ArrayList[PrevisionBuilder]
+  private final val damocleses: java.util.List[DamoclesBuilder] = new java.util.ArrayList[DamoclesBuilder]
+  private final val operations: java.util.List[OperationBuilder] = new java.util.ArrayList[OperationBuilder]
 }
 
-class MutableDamocles {
+class DamoclesBuilder {
 
   def getCategory: String = {
     category
@@ -119,7 +119,7 @@ class MutableDamocles {
   private var amount: java.math.BigDecimal = null
 }
 
-class MutableOperation {
+class OperationBuilder {
   def getCategory: String = {
     category
   }
@@ -160,7 +160,7 @@ class MutableOperation {
   private var date: String = null
 }
 
-class MutablePrevision {
+class PrevisionBuilder {
   def getCategory: String = {
     category
   }
