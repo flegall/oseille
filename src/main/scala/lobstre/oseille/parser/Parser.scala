@@ -3,7 +3,7 @@ package lobstre.oseille.parser
 import java.io._
 import java.math.BigDecimal
 
-import lobstre.oseille.model.{MutableOperation, MutableDamocles, MutablePrevision, MutableAccount}
+import lobstre.oseille.model._
 import lobstre.oseille.util.Util
 
 object Parser {
@@ -12,6 +12,11 @@ object Parser {
   private val PREVISION_TOKEN: String = "prevision:"
   private val DAMOCLES_TOKEN: String = "damocles:"
   private val OPERATION_TOKEN: String = "operation:"
+
+  def readAccount(file: File): Account = {
+    val mutableAccount: MutableAccount = read(file)
+    mutableAccount.build()
+  }
 
   def read(file: File): MutableAccount = {
     val acc: MutableAccount = new MutableAccount

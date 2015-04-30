@@ -1,9 +1,9 @@
 package lobstre.oseille.model
 
-import java.math.BigDecimal
 import java.util
-import java.util.{Comparator, Collections}
+import java.util.{Collections, Comparator}
 
+import lobstre.oseille.model.MutableAccount.{toDamocleses, toScalaMap}
 import lobstre.oseille.util.StringComparator
 
 
@@ -19,33 +19,56 @@ class MutableAccount {
     Collections.sort(operations, operationsComparator)
   }
 
-  def getInitialAmount: BigDecimal = {
+  def getInitialAmount: java.math.BigDecimal = {
     initialAmount
   }
 
-  def setInitialAmount(initialAmout: BigDecimal) {
+  def setInitialAmount(initialAmout: java.math.BigDecimal) {
     this.initialAmount = initialAmout
   }
 
-  def getBudgets: util.NavigableMap[String, BigDecimal] = {
+  def getBudgets: java.util.NavigableMap[String,  java.math.BigDecimal] = {
     budgets
   }
 
-  def getPrevisions: util.List[MutablePrevision] = {
+  def getPrevisions: java.util.List[MutablePrevision] = {
     previsions
   }
 
-  def getDamocleses: util.List[MutableDamocles] = {
+  def getDamocleses: java.util.List[MutableDamocles] = {
     damocleses
   }
 
-  def getOperations: util.List[MutableOperation] = {
+  def getOperations: java.util.List[MutableOperation] = {
     operations
   }
 
-  private var initialAmount: BigDecimal = null
-  private final val budgets: util.NavigableMap[String, BigDecimal] = new util.TreeMap[String, BigDecimal]
-  private final val previsions: util.List[MutablePrevision] = new util.ArrayList[MutablePrevision]
-  private final val damocleses: util.List[MutableDamocles] = new util.ArrayList[MutableDamocles]
-  private final val operations: util.List[MutableOperation] = new util.ArrayList[MutableOperation]
+  def build(): Account = {
+    Account(initialAmount = initialAmount,
+      budgets = toScalaMap(budgets),
+      damocleses = toDamocleses(damocleses),
+      previsions= Seq.empty,
+      operations = Seq.empty)
+  }
+
+  private var initialAmount:  java.math.BigDecimal = null
+  private final val budgets: java.util.NavigableMap[String, java.math.BigDecimal] = new java.util.TreeMap[String, java.math.BigDecimal]
+  private final val previsions: java.util.List[MutablePrevision] = new java.util.ArrayList[MutablePrevision]
+  private final val damocleses: java.util.List[MutableDamocles] = new java.util.ArrayList[MutableDamocles]
+  private final val operations: java.util.List[MutableOperation] = new java.util.ArrayList[MutableOperation]
+}
+
+object MutableAccount {
+  private[MutableAccount] def toScalaMap(budgets: java.util.NavigableMap[String, java.math.BigDecimal]): Map[String, BigDecimal] = {
+    import scala.collection.JavaConversions._
+
+    budgets.map {
+      case (category, amount) =>
+        category -> BigDecimal(amount)
+    }.toMap
+  }
+
+  private[MutableAccount] def toDamocleses(damocleses: java.util.List[MutableDamocles]): Seq[Damocles] = {
+    Seq.empty
+  }
 }
