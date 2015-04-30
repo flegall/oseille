@@ -13,7 +13,6 @@ object Parser {
   private val DAMOCLES_TOKEN: String = "damocles:"
   private val OPERATION_TOKEN: String = "operation:"
 
-  @throws(classOf[IOException])
   def read(file: File): MutableAccount = {
     val acc: MutableAccount = new MutableAccount
     val in: BufferedReader = new BufferedReader(new FileReader(file))
@@ -67,7 +66,6 @@ object Parser {
     acc
   }
 
-  @throws(classOf[IOException])
   def write(acc: MutableAccount, file: File) {
     acc.sortOperations
     initZeroBudgets(acc)
