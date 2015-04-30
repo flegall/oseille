@@ -3,6 +3,7 @@ package lobstre.oseille.model
 import java.math.BigDecimal
 
 class MutableDamocles {
+
   def getCategory: String = {
     category
   }
@@ -26,6 +27,8 @@ class MutableDamocles {
   def setAmount(value: BigDecimal) {
     this.amount = value
   }
+
+  def build(): Damocles = Damocles(getCategory, getLabel, getAmount)
 
   private var category: String = null
   private var label: String = null

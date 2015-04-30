@@ -27,6 +27,8 @@ class MutablePrevision {
     this.amount = value
   }
 
+  def build(): Prevision = Prevision(category, label, amount)
+
   private var category: String = null
   private var label: String = null
   private var amount: BigDecimal = null

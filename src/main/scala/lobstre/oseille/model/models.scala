@@ -20,6 +20,6 @@ case class Operation(category: String, label: String, amount: BigDecimal, date: 
 case class Account(initialAmount: BigDecimal,
                    budgets: Map[String, BigDecimal],
                    damocleses: Seq[Damocles],
-                   previsions: Seq[Damocles],
+                   previsions: Seq[Prevision],
                    operations: Seq[Operation])
 

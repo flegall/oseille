@@ -2,6 +2,9 @@ package lobstre.oseille.model
 
 import java.math.BigDecimal
 
+import org.threeten.bp.LocalDate.parse
+import org.threeten.bp.format.DateTimeFormatter.ofPattern
+
 class MutableOperation {
   def getCategory: String = {
     category
@@ -34,6 +37,8 @@ class MutableOperation {
   def setDate(date: String) {
     this.date = date
   }
+
+  def build(): Operation = Operation(category, label, amount, parse(date, ofPattern("yy-MM-dd")))
 
   private var category: String = null
   private var label: String = null
