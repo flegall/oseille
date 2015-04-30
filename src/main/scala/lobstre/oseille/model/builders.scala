@@ -1,12 +1,14 @@
 package lobstre.oseille.model
 
+
 import java.util.{Collections, Comparator}
 
 import lobstre.oseille.util.StringComparator
+import org.threeten.bp.LocalDate._
+import org.threeten.bp.format.DateTimeFormatter._
 
 
 class MutableAccount {
-
   def sortOperations {
     val comparator: StringComparator = new StringComparator
     val operationsComparator: Comparator[MutableOperation] = new Comparator[MutableOperation] {
@@ -83,4 +85,112 @@ class MutableAccount {
   private final val damocleses: java.util.List[MutableDamocles] = new java.util.ArrayList[MutableDamocles]
   private final val operations: java.util.List[MutableOperation] = new java.util.ArrayList[MutableOperation]
 }
+
+class MutableDamocles {
+
+  def getCategory: String = {
+    category
+  }
+
+  def setCategory(category: String) {
+    this.category = category
+  }
+
+  def getLabel: String = {
+    label
+  }
+
+  def setLabel(label: String) {
+    this.label = label
+  }
+
+  def getAmount: java.math.BigDecimal = {
+    amount
+  }
+
+  def setAmount(value: java.math.BigDecimal) {
+    this.amount = value
+  }
+
+  def build(): Damocles = Damocles(getCategory, getLabel, getAmount)
+
+  private var category: String = null
+  private var label: String = null
+  private var amount: java.math.BigDecimal = null
+}
+
+class MutableOperation {
+  def getCategory: String = {
+    category
+  }
+
+  def setCategory(category: String) {
+    this.category = category
+  }
+
+  def getLabel: String = {
+    label
+  }
+
+  def setLabel(label: String) {
+    this.label = label
+  }
+
+  def getAmount: java.math.BigDecimal = {
+    amount
+  }
+
+  def setAmount(value: java.math.BigDecimal) {
+    this.amount = value
+  }
+
+  def getDate: String = {
+    date
+  }
+
+  def setDate(date: String) {
+    this.date = date
+  }
+
+  def build(): Operation = Operation(category, label, amount, parse(date, ofPattern("yy-MM-dd")))
+
+  private var category: String = null
+  private var label: String = null
+  private var amount: java.math.BigDecimal = null
+  private var date: String = null
+}
+
+class MutablePrevision {
+  def getCategory: String = {
+    category
+  }
+
+  def setCategory(category: String) {
+    this.category = category
+  }
+
+  def getLabel: String = {
+    label
+  }
+
+  def setLabel(label: String) {
+    this.label = label
+  }
+
+  def getAmount: java.math.BigDecimal = {
+    amount
+  }
+
+  def setAmount(value: java.math.BigDecimal) {
+    this.amount = value
+  }
+
+  def build(): Prevision = Prevision(category, label, amount)
+
+  private var category: String = null
+  private var label: String = null
+  private var amount: java.math.BigDecimal = null
+}
+
+
 
