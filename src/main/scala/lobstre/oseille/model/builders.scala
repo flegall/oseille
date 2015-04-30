@@ -7,8 +7,24 @@ import lobstre.oseille.util.StringComparator
 import org.threeten.bp.LocalDate._
 import org.threeten.bp.format.DateTimeFormatter._
 
+import scala.beans.BeanProperty
 
 class AccountBuilder {
+  @BeanProperty
+  var initialAmount:  java.math.BigDecimal = null
+
+  @BeanProperty
+  val budgets: java.util.NavigableMap[String, java.math.BigDecimal] = new java.util.TreeMap[String, java.math.BigDecimal]
+
+  @BeanProperty
+  val previsions: java.util.List[PrevisionBuilder] = new java.util.ArrayList[PrevisionBuilder]
+
+  @BeanProperty
+  val damocleses: java.util.List[DamoclesBuilder] = new java.util.ArrayList[DamoclesBuilder]
+
+  @BeanProperty
+  val operations: java.util.List[OperationBuilder] = new java.util.ArrayList[OperationBuilder]
+
   def sortOperations() {
     val comparator: StringComparator = new StringComparator
     val operationsComparator: Comparator[OperationBuilder] = new Comparator[OperationBuilder] {
@@ -17,30 +33,6 @@ class AccountBuilder {
       }
     }
     Collections.sort(operations, operationsComparator)
-  }
-
-  def getInitialAmount: java.math.BigDecimal = {
-    initialAmount
-  }
-
-  def setInitialAmount(initialAmout: java.math.BigDecimal) {
-    this.initialAmount = initialAmout
-  }
-
-  def getBudgets: java.util.NavigableMap[String,  java.math.BigDecimal] = {
-    budgets
-  }
-
-  def getPrevisions: java.util.List[PrevisionBuilder] = {
-    previsions
-  }
-
-  def getDamocleses: java.util.List[DamoclesBuilder] = {
-    damocleses
-  }
-
-  def getOperations: java.util.List[OperationBuilder] = {
-    operations
   }
 
   def build(): Account = {
@@ -77,119 +69,51 @@ class AccountBuilder {
 
     operations.map { mutableOperation => mutableOperation.build()}
   }
-
-
-  private var initialAmount:  java.math.BigDecimal = null
-  private final val budgets: java.util.NavigableMap[String, java.math.BigDecimal] = new java.util.TreeMap[String, java.math.BigDecimal]
-  private final val previsions: java.util.List[PrevisionBuilder] = new java.util.ArrayList[PrevisionBuilder]
-  private final val damocleses: java.util.List[DamoclesBuilder] = new java.util.ArrayList[DamoclesBuilder]
-  private final val operations: java.util.List[OperationBuilder] = new java.util.ArrayList[OperationBuilder]
 }
 
 class DamoclesBuilder {
 
-  def getCategory: String = {
-    category
-  }
+  @BeanProperty
+  var category: String = null
 
-  def setCategory(category: String) {
-    this.category = category
-  }
+  @BeanProperty
+  var label: String = null
 
-  def getLabel: String = {
-    label
-  }
-
-  def setLabel(label: String) {
-    this.label = label
-  }
-
-  def getAmount: java.math.BigDecimal = {
-    amount
-  }
-
-  def setAmount(value: java.math.BigDecimal) {
-    this.amount = value
-  }
+  @BeanProperty
+  var amount: java.math.BigDecimal = null
 
   def build(): Damocles = Damocles(getCategory, getLabel, getAmount)
-
-  private var category: String = null
-  private var label: String = null
-  private var amount: java.math.BigDecimal = null
 }
 
 class OperationBuilder {
-  def getCategory: String = {
-    category
-  }
 
-  def setCategory(category: String) {
-    this.category = category
-  }
+  @BeanProperty
+  var category: String = null
 
-  def getLabel: String = {
-    label
-  }
+  @BeanProperty
+  var label: String = null
 
-  def setLabel(label: String) {
-    this.label = label
-  }
+  @BeanProperty
+  var amount: java.math.BigDecimal = null
 
-  def getAmount: java.math.BigDecimal = {
-    amount
-  }
-
-  def setAmount(value: java.math.BigDecimal) {
-    this.amount = value
-  }
-
-  def getDate: String = {
-    date
-  }
-
-  def setDate(date: String) {
-    this.date = date
-  }
+  @BeanProperty
+  var date: String = null
 
   def build(): Operation = Operation(category, label, amount, parse(date, ofPattern("yy-MM-dd")))
-
-  private var category: String = null
-  private var label: String = null
-  private var amount: java.math.BigDecimal = null
-  private var date: String = null
 }
 
 class PrevisionBuilder {
-  def getCategory: String = {
-    category
-  }
 
-  def setCategory(category: String) {
-    this.category = category
-  }
+  @BeanProperty
+  var category: String = null
 
-  def getLabel: String = {
-    label
-  }
+  @BeanProperty
+  var label: String = null
 
-  def setLabel(label: String) {
-    this.label = label
-  }
-
-  def getAmount: java.math.BigDecimal = {
-    amount
-  }
-
-  def setAmount(value: java.math.BigDecimal) {
-    this.amount = value
-  }
+  @BeanProperty
+  var amount: java.math.BigDecimal = null
 
   def build(): Prevision = Prevision(category, label, amount)
-
-  private var category: String = null
-  private var label: String = null
-  private var amount: java.math.BigDecimal = null
 }
 
 
