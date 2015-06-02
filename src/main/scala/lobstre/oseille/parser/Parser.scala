@@ -14,8 +14,7 @@ object Parser {
   private val OPERATION_TOKEN: String = "operation:"
 
   def readAccount(file: File): Account = {
-    val mutableAccount: AccountBuilder = read(file)
-    mutableAccount.build()
+    read(file).build()
   }
 
   def read(file: File): AccountBuilder = {
