@@ -1,6 +1,5 @@
 # Compiled source 
 *.class
-*.jar
 oseille/output/*
 oseille/bin/*
 target
