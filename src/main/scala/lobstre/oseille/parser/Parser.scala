@@ -67,11 +67,13 @@ object Parser {
     }
     initZeroBudgets(acc)
     acc.sortOperations()
+    acc.sortDamocleses()
     acc
   }
 
   def write(acc: AccountBuilder, file: File) {
     acc.sortOperations()
+    acc.sortDamocleses()
     initZeroBudgets(acc)
     val pw: PrintWriter = new PrintWriter(file)
     try {

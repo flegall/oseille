@@ -77,6 +77,7 @@ public class ListAccount implements Command {
     }
 
     public static void renderDamocles(final AccountBuilder account) {
+        account.sortDamocleses();
         System.out.println("Damocles: ");
 
         int count = 0;

@@ -3,6 +3,7 @@ package lobstre.oseille.model
 
 import java.util.{Collections, Comparator}
 
+import lobstre.oseille.model.DamoclesBuilder.BY_AMOUNT
 import lobstre.oseille.util.StringComparator
 import org.threeten.bp.LocalDate._
 import org.threeten.bp.format.DateTimeFormatter._
@@ -33,6 +34,10 @@ class AccountBuilder {
       }
     }
     Collections.sort(operations, operationsComparator)
+  }
+
+  def sortDamocleses() = {
+    Collections.sort(damocleses, BY_AMOUNT)
   }
 
   def build(): Account = {
@@ -83,6 +88,21 @@ class DamoclesBuilder {
   var amount: java.math.BigDecimal = null
 
   def build(): Damocles = Damocles(getCategory, getLabel, getAmount)
+
+  def withAmount(decimal: java.math.BigDecimal): DamoclesBuilder = {
+    amount = decimal
+    this
+  }
+}
+
+object DamoclesBuilder {
+  def newDamoclesBuilder() = new DamoclesBuilder()
+
+  val BY_AMOUNT: Comparator[DamoclesBuilder] with Object {def compare(o1: DamoclesBuilder, o2: DamoclesBuilder): Int} = new Comparator[DamoclesBuilder] {
+    override def compare(o1: DamoclesBuilder, o2: DamoclesBuilder): Int = {
+      o1.amount.compareTo(o2.amount)
+    }
+  }
 }
 
 class OperationBuilder {
