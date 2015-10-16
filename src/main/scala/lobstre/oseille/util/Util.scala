@@ -38,7 +38,8 @@ object Util {
     * @param in
      * the input array (Object [][])
     */
-  @SuppressWarnings(Array("unchecked")) def asMap[K, V](in: Array[Array[AnyRef]]): java.util.Map[K, V] = {
+  @SuppressWarnings(Array("unchecked"))
+  def asMap[K, V](in: Array[Array[AnyRef]]): java.util.Map[K, V] = {
     val ret: java.util.Map[K, V] = new java.util.LinkedHashMap[K, V](in.length)
     for (keyValue <- in) {
       ret.put(keyValue(0).asInstanceOf[K], keyValue(1).asInstanceOf[V])
