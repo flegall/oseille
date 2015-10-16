@@ -4,7 +4,9 @@ import org.threeten.bp.LocalDate
 
 sealed trait Expense {
   def category: String
+
   def label: String
+
   def amount: BigDecimal
 }
 

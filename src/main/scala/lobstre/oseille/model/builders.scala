@@ -11,7 +11,7 @@ import scala.beans.BeanProperty
 
 class AccountBuilder {
   @BeanProperty
-  var initialAmount:  java.math.BigDecimal = null
+  var initialAmount: java.math.BigDecimal = null
 
   @BeanProperty
   val budgets: java.util.NavigableMap[String, java.math.BigDecimal] = new java.util.TreeMap[String, java.math.BigDecimal]
@@ -61,13 +61,13 @@ class AccountBuilder {
   private def toPrevisions: Seq[Prevision] = {
     import scala.collection.JavaConversions._
 
-    previsions.map { mutablePrevision => mutablePrevision.build()}
+    previsions.map { mutablePrevision => mutablePrevision.build() }
   }
 
   private def toOperations: Seq[Operation] = {
     import scala.collection.JavaConversions._
 
-    operations.map { mutableOperation => mutableOperation.build()}
+    operations.map { mutableOperation => mutableOperation.build() }
   }
 }
 

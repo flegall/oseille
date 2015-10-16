@@ -2,15 +2,15 @@ package lobstre.oseille.util
 
 case object Padding {
   /**
-   * Pads or cuts a String to be aligned to the left.
-   *
-   * @param value
+    * Pads or cuts a String to be aligned to the left.
+    *
+    * @param value
      * the { @link String} value
-   * @param size
+    * @param size
      * the text size
-   * @return a { @link String} of the desired size, including a cut or padded
-   *                   copy of input { @link String}
-   */
+    * @return a { @link String} of the desired size, including a cut or padded
+    *         copy of input { @link String}
+    */
   def padLeft(value: String, size: Int): String = {
     if (value.length == size) {
       value
@@ -22,15 +22,15 @@ case object Padding {
   }
 
   /**
-   * Pads or cuts a String to be aligned to the right.
-   *
-   * @param value
+    * Pads or cuts a String to be aligned to the right.
+    *
+    * @param value
      * the { @link String} value
-   * @param size
+    * @param size
      * the text size
-   * @return a { @link String} of the desired size, including a cut or padded
-   *                   copy of input { @link String}
-   */
+    * @return a { @link String} of the desired size, including a cut or padded
+    *         copy of input { @link String}
+    */
   def padRight(value: String, size: Int): String = {
     if (value.length == size) {
       value
