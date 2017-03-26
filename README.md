@@ -22,10 +22,15 @@ For this I need two things :
 Technically : It works fully in command line, storage/persistence is based on human readable text files. It provides a single "harpagon" command to operate.
 
 # Requirements
-Java 1.6
+Java 1.8
 
 # Build
-Use Ant to generate the jar file.
+- Define an env var named 'OSEILLE_INSTALL_PATH' which is the target installation path
+- Run ./activator deploy
+- Go to your OSEILLE_INSTALL_PATH directory, you'll find 3 files: 
+  - harpagon (a shell script)
+  - harpagon.bat (a bat script)
+  - harpagon.jar (a java jar)
 
 # Usage 
 
